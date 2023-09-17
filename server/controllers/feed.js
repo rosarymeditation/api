@@ -103,20 +103,20 @@ module.exports = {
   },
 
   findAll: async (req, res) => {
-    // try {
-    const { page = 1, limit = 10 } = req.body;
-    const data = await Feed.find()
-      .skip((page - 1) * limit) // Skip documents based on the current page
-      .limit(limit)
-      .sort({ createdAt: "desc" })
-      .populate("author")
-      .populate("status")
-      .populate("likes")
-      .populate("comments");
-    return res.status(OK).send({ data: data });
-    // } catch (err) {
-    //   return res.status(SERVER_ERROR).send({ error: true, message: err });
-    // }
+    try {
+      const { page = 1, limit = 10 } = req.body;
+      const data = await Feed.find()
+        .skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit)
+        .sort({ createdAt: "desc" })
+        .populate("author")
+        .populate("status")
+        .populate("likes")
+        .populate("comments");
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
   },
 
   delete: async (req, res) => {
