@@ -51,7 +51,7 @@ const cookieExtractor = (res) => {
   } else return token;
 };
 const mongoString =
-  "mongodb+srv://nnamdi4nwosu:6xVUznWAtJ3mxNfy@cluster0.kbvmdmk.mongodb.net/";
+  "mongodb+srv://nnamdi4nwosu:6xVUznWAtJ3mxNfy@cluster0.kbvmdmk.mongodb.net/test";
 const mongoose = require("mongoose");
 mongoose.connect(mongoString);
 const database = mongoose.connection;
