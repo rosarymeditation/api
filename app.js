@@ -50,7 +50,8 @@ const cookieExtractor = (res) => {
     token = req.cookies[ACCESS_TOKEN];
   } else return token;
 };
-const mongoString = process.env.DATABASE_URL;
+const mongoString =
+  "mongodb+srv://nnamdi4nwosu:6xVUznWAtJ3mxNfy@cluster0.kbvmdmk.mongodb.net/";
 const mongoose = require("mongoose");
 mongoose.connect(mongoString);
 const database = mongoose.connection;
