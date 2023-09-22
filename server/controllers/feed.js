@@ -85,9 +85,9 @@ module.exports = {
   },
 
   findByUser: async (req, res) => {
-    const userId = req.userData.id;
-    const { page = 1, limit = 10 } = req.body;
     try {
+      const userId = req.userData.id;
+      const { page = 1, limit = 10 } = req.body;
       const data = await Feed.find({ author: userId })
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
@@ -128,25 +128,7 @@ module.exports = {
       return res.status(OK).send({ error: true, message: err });
     }
   },
-  // update: async (req, res) => {
-  //   try {
-  //     const photoObject = req.file;
-  //     const photo = photoObject ? req.file.location : null;
-  //     const userId = req.userData.id;
-  //     const { content } = req.body;
-  //     const data = Feed({
-  //       author: userId,
-  //       status: "6501e15012296a1e7f03a47c",
-  //       content: content,
-  //       url: photo || "",
-  //     });
-  //     await data.save();
 
-  //     return res.status(OK).send({ error: false });
-  //   } catch (err) {
-  //     return res.status(OK).send({ error: true });
-  //   }
-  // },
   update: async (req, res) => {
     try {
       console.log(req.params.id);

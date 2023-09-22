@@ -20,54 +20,60 @@ const User = require("../models/user");
 
 module.exports = {
   signUp: async (req, res) => {
-    const { password, email, firstname, lastname } = req.body;
-    const findEmail = await User.findOne({ email });
+    try {
+      const { password, email, firstname, lastname } = req.body;
+      const findEmail = await User.findOne({ email });
 
-    if (findEmail) {
-      return res.status(VALIDATION_ERROR).send({
-        error: true,
-        message: "Email already exist",
-      });
-    }
-    bcrypt.hash(password, 10, async (err, hash) => {
-      if (err) {
-        return res.status(SERVER_ERROR).send({ message: "Error", error: true });
-      } else {
-        const dataObj = new User({
-          email: email,
-          password: hash,
-          firstname: CapitalizeFirstLetter(firstname),
-          lastname: CapitalizeFirstLetter(lastname),
-          email,
+      if (findEmail) {
+        return res.status(VALIDATION_ERROR).send({
+          error: true,
+          message: "Email already exist",
         });
-        try {
-          const data = await dataObj.save();
-          const token = jwt.sign(
-            {
-              id: data.id,
-              email: email,
-              firstname: firstname,
-              lastname: lastname,
-            },
-            secret,
-            {
-              expiresIn: "7000d",
-            }
-          );
-          return res.status(OK).send({
-            error: false,
-            token: token,
-            userId: data.id,
-          });
-        } catch (err) {
-          console.log(err);
-          return res.status(SERVER_ERROR).send({
-            error: true,
-            message: err,
-          });
-        }
       }
-    });
+      bcrypt.hash(password, 10, async (err, hash) => {
+        if (err) {
+          return res
+            .status(SERVER_ERROR)
+            .send({ message: "Error", error: true });
+        } else {
+          const dataObj = new User({
+            email: email,
+            password: hash,
+            firstname: CapitalizeFirstLetter(firstname),
+            lastname: CapitalizeFirstLetter(lastname),
+            email,
+          });
+          try {
+            const data = await dataObj.save();
+            const token = jwt.sign(
+              {
+                id: data.id,
+                email: email,
+                firstname: firstname,
+                lastname: lastname,
+              },
+              secret,
+              {
+                expiresIn: "7000d",
+              }
+            );
+            return res.status(OK).send({
+              error: false,
+              token: token,
+              userId: data.id,
+            });
+          } catch (err) {
+            console.log(err);
+            return res.status(SERVER_ERROR).send({
+              error: true,
+              message: err,
+            });
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
   },
@@ -93,19 +99,35 @@ module.exports = {
     }
   },
 
-  updateProfile: async (req, res) => {
-    const id = req.userData.id;
-    const formBody = req.body;
-
-    const options = { new: true };
-    if (req.files && req.files.avatar) {
-      formBody.avatar = req.files.avatar[0].location;
-    }
-    if (req.files && req.files.banner) {
-      formBody.banner = req.files.banner[0].location;
-    }
-    console.log(req.body);
+  deleteUser: async (req, res) => {
     try {
+      const id = req.userData.id;
+
+      const options = { new: true };
+      const data = await User.findByIdAndUpdate(
+        id,
+        { hasDeleted: true },
+        options
+      );
+      return res.status(OK).send(data);
+    } catch (err) {
+      return res.status(VALIDATION_ERROR).send({ error: true, message: err });
+    }
+  },
+
+  updateProfile: async (req, res) => {
+    try {
+      const id = req.userData.id;
+      const formBody = req.body;
+
+      const options = { new: true };
+      if (req.files && req.files.avatar) {
+        formBody.avatar = req.files.avatar[0].location;
+      }
+      if (req.files && req.files.banner) {
+        formBody.banner = req.files.banner[0].location;
+      }
+      console.log(req.body);
       const data = await User.findByIdAndUpdate(id, formBody, options);
       return res.status(OK).send(data);
     } catch (err) {
@@ -120,6 +142,7 @@ module.exports = {
 
       const user = await User.findOne({
         email: email,
+        hasDeleted: false,
       });
 
       if (!user) {
@@ -165,7 +188,7 @@ module.exports = {
     const { email } = req.body;
     console.log(email);
     try {
-      const findUser = await User.findOne({ email: email });
+      const findUser = await User.findOne({ email: email, hasDeleted: false });
       console.log(findUser);
       if (findUser) {
         const options = { new: true };
@@ -202,101 +225,117 @@ module.exports = {
   },
 
   signUp: async (req, res) => {
-    const { password, email, firstname, lastname } = req.body;
-    const findEmail = await User.findOne({ email });
+    try {
+      const { password, email, firstname, lastname } = req.body;
+      const findEmail = await User.findOne({ email, hasDeleted: false });
 
-    if (findEmail) {
-      return res.status(VALIDATION_ERROR).send({
-        error: true,
-        message: "Email already exist",
-      });
-    }
-    bcrypt.hash(password, 10, async (err, hash) => {
-      if (err) {
-        return res.status(SERVER_ERROR).send({ message: "Error", error: true });
-      } else {
-        const dataObj = new User({
-          email: email,
-          password: hash,
-          firstname: CapitalizeFirstLetter(firstname),
-          lastname: CapitalizeFirstLetter(lastname),
-          email,
+      if (findEmail) {
+        return res.status(VALIDATION_ERROR).send({
+          error: true,
+          message: "Email already exist",
         });
-        try {
-          const data = await dataObj.save();
-          const token = jwt.sign(
-            {
-              id: data.id,
-              email: email,
-              firstname: firstname,
-              lastname: lastname,
-            },
-            secret,
-            {
-              expiresIn: "7000d",
-            }
-          );
-          return res.status(OK).send({
-            error: false,
-            token: token,
-            userId: data.id,
-          });
-        } catch (err) {
-          console.log(err);
-          return res.status(SERVER_ERROR).send({
-            error: true,
-            message: err,
-          });
-        }
       }
-    });
+      bcrypt.hash(password, 10, async (err, hash) => {
+        if (err) {
+          return res
+            .status(SERVER_ERROR)
+            .send({ message: "Error", error: true });
+        } else {
+          const dataObj = new User({
+            email: email,
+            password: hash,
+            firstname: CapitalizeFirstLetter(firstname),
+            lastname: CapitalizeFirstLetter(lastname),
+            email,
+          });
+          try {
+            const data = await dataObj.save();
+            const token = jwt.sign(
+              {
+                id: data.id,
+                email: email,
+                firstname: firstname,
+                lastname: lastname,
+              },
+              secret,
+              {
+                expiresIn: "7000d",
+              }
+            );
+            return res.status(OK).send({
+              error: false,
+              token: token,
+              userId: data.id,
+            });
+          } catch (err) {
+            console.log(err);
+            return res.status(SERVER_ERROR).send({
+              error: true,
+              message: err,
+            });
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
   },
 
   passwordVerification: async (req, res) => {
-    const { email, code } = req.body;
-    console.log(`code: ${code}   email: ${email}`);
-    const findUser = await User.findOne({ email, verifyCode: code });
+    try {
+      const { email, code } = req.body;
+      console.log(`code: ${code}   email: ${email}`);
+      const findUser = await User.findOne({ email, verifyCode: code });
 
-    if (!findUser) {
-      console.log("No    email----");
-      return res.status(VALIDATION_ERROR).send({
-        error: true,
-        message: "Code does not exist",
-      });
-    } else {
-      console.log("Yesyshshshhs");
-      return res.status(OK).send({ message: "Successful", error: false });
+      if (!findUser) {
+        console.log("No    email----");
+        return res.status(VALIDATION_ERROR).send({
+          error: true,
+          message: "Code does not exist",
+        });
+      } else {
+        console.log("Yesyshshshhs");
+        return res.status(OK).send({ message: "Successful", error: false });
+      }
+    } catch (err) {
+      console.log(err);
     }
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
   },
   changePassword: async (req, res) => {
-    const { email, code, password } = req.body;
-    const findUser = await User.findOne({ email, verifyCode: code });
+    try {
+      const { email, code, password } = req.body;
+      const findUser = await User.findOne({ email, verifyCode: code });
 
-    if (!findUser) {
-      return res.status(VALIDATION_ERROR).send({
-        error: true,
-        message: "Code does not exist",
-      });
-    }
-    bcrypt.hash(password, 10, async (err, hash) => {
-      if (err) {
-        return res.status(SERVER_ERROR).send({ message: "Error", error: true });
-      } else {
-        const options = { new: true };
-        console.log("0300404040040i0000------00595959");
-        const user = await User.findByIdAndUpdate(
-          findUser._id,
-          { password: hash, verifyCode: "" },
-          options
-        );
-
-        return res.status(OK).send({ message: "Successful", error: false });
+      if (!findUser) {
+        return res.status(VALIDATION_ERROR).send({
+          error: true,
+          message: "Code does not exist",
+        });
       }
-    });
+      bcrypt.hash(password, 10, async (err, hash) => {
+        if (err) {
+          return res
+            .status(SERVER_ERROR)
+            .send({ message: "Error", error: true });
+        } else {
+          const options = { new: true };
+          console.log("0300404040040i0000------00595959");
+          const user = await User.findByIdAndUpdate(
+            findUser._id,
+            { password: hash, verifyCode: "" },
+            options
+          );
+
+          return res.status(OK).send({ message: "Successful", error: false });
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
   },

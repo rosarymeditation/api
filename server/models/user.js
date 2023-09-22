@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   banner: { type: String },
   bio: { type: String },
   verifyCode: { type: String },
+  hasDeleted: { type: Boolean, default: false },
   codeExpiry: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },
 });

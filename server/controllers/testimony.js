@@ -13,14 +13,13 @@ const {
 
 module.exports = {
   create: async (req, res) => {
-    const userId = req.userData.id;
-    const { content } = req.body;
-    const data = Testimony({
-      author: userId,
-      content: content,
-    });
-
     try {
+      const userId = req.userData.id;
+      const { content } = req.body;
+      const data = Testimony({
+        author: userId,
+        content: content,
+      });
       const save = await data.save();
       return res.status(OK).send({ error: false });
     } catch (err) {
