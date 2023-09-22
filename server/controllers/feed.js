@@ -4,6 +4,7 @@
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const Feed = require("../models/feed");
+const FeedStatus = require("../models/feedStatus");
 const FeedLike = require("../models/feedLikes");
 const User = require("../models/user");
 const { upload } = require("../utility/global");
@@ -105,7 +106,8 @@ module.exports = {
   findAll: async (req, res) => {
     try {
       const { page = 1, limit = 10 } = req.body;
-      const data = await Feed.find()
+      const findStatus = await FeedStatus.findOne({ name: "Approved" });
+      const data = await Feed.find({ status: findStatus._id })
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
         .sort({ createdAt: "desc" })
