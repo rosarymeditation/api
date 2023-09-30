@@ -308,53 +308,7 @@ module.exports = {
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
   },
-  changePassword: async (req, res) => {
-    try {
-      const { email, code, password } = req.body;
-      const findUser = await User.findOne({ email, verifyCode: code });
 
-      if (!findUser) {
-        return res.status(VALIDATION_ERROR).send({
-          error: true,
-          message: "Code does not exist",
-        });
-      }
-      bcrypt.hash(password, 10, async (err, hash) => {
-        if (err) {
-          return res
-            .status(SERVER_ERROR)
-            .send({ message: "Error", error: true });
-        } else {
-          const options = { new: true };
-          console.log("0300404040040i0000------00595959");
-          const user = await User.findByIdAndUpdate(
-            findUser._id,
-            { password: hash, verifyCode: "" },
-            options
-          );
 
-          return res.status(OK).send({ message: "Successful", error: false });
-        }
-      });
-    } catch (err) {
-      console.log(err);
-    }
 
-    //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
-  },
-
-  createRole: async (req, res) => {
-    try {
-      const { name } = req.body;
-      const data = Role({
-        name: name,
-      });
-      await data.save();
-
-      return res.status(OK).send({ error: false });
-    } catch (err) {
-      console.log(err);
-      return res.status(OK).send({ error: true });
-    }
-  },
 };
