@@ -7,6 +7,12 @@ const userSchema = new mongoose.Schema({
   firstname: { type: String },
   lastname: { type: String },
   banner: { type: String },
+  role: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Role",
+    required: true,
+  },
+
   bio: { type: String },
   verifyCode: { type: String },
   hasDeleted: { type: Boolean, default: false },

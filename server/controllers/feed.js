@@ -24,9 +24,17 @@ module.exports = {
       const photo = photoObject ? req.file.location : null;
       const userId = req.userData.id;
       const { content } = req.body;
+      const findUser = await User.findById(userId);
+      let feedStatus;
+      if (findUser.role == "65305951d24dd0acc26c71df") {
+        feedStatus = "6501e15612296a1e7f03a47e";
+      } else {
+        feedStatus = "6501e15012296a1e7f03a47c";
+      }
+      //
       const data = Feed({
         author: userId,
-        status: "6501e15012296a1e7f03a47c",
+        status: feedStatus,
         content: content,
         url: photo || "",
       });

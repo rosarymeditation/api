@@ -17,6 +17,7 @@ const bcrypt = require("bcryptjs");
 const { email1, email2 } = require("../utility/constants");
 const { CapitalizeFirstLetter } = require("../utility/global");
 const User = require("../models/user");
+const Role = require("../models/role");
 
 module.exports = {
   signUp: async (req, res) => {
@@ -39,6 +40,7 @@ module.exports = {
           const dataObj = new User({
             email: email,
             password: hash,
+            role: "6530595ad24dd0acc26c71e1",
             firstname: CapitalizeFirstLetter(firstname),
             lastname: CapitalizeFirstLetter(lastname),
             email,
@@ -246,6 +248,7 @@ module.exports = {
             password: hash,
             firstname: CapitalizeFirstLetter(firstname),
             lastname: CapitalizeFirstLetter(lastname),
+            role: "6530595ad24dd0acc26c71e1",
             email,
           });
           try {
@@ -338,5 +341,20 @@ module.exports = {
     }
 
     //return res.status(VALIDATION_ERROR).send({ message: error, error: true });
+  },
+
+  createRole: async (req, res) => {
+    try {
+      const { name } = req.body;
+      const data = Role({
+        name: name,
+      });
+      await data.save();
+
+      return res.status(OK).send({ error: false });
+    } catch (err) {
+      console.log(err);
+      return res.status(OK).send({ error: true });
+    }
   },
 };

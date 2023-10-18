@@ -3,6 +3,7 @@ const { rootUrl } = require("../utility/constants");
 const { auth, upload } = require("../utility/global");
 module.exports = (app) => {
   app.post(rootUrl("sign-up"), controller.signUp);
+  app.post(rootUrl("create-role"), controller.createRole);
   app.post(rootUrl("sign-in"), controller.signIn);
   app.post(rootUrl("delete-user"), auth, controller.deleteUser);
   app.post(rootUrl("forgot-password"), controller.sendForgotPasswordCode);
