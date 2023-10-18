@@ -74,6 +74,8 @@ const connectDB = async () => {
 // Require our routes into the application.
 const refPath = "./server/routes/";
 
+require(`${refPath}affirmation`)(app);
+require(`${refPath}dailyVerse`)(app);
 require(`${refPath}testimony`)(app);
 require(`${refPath}user`)(app);
 require(`${refPath}feed`)(app);
