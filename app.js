@@ -86,6 +86,8 @@ require(`${refPath}language`)(app);
 require(`${refPath}suggestion`)(app);
 require(`${refPath}prayerCatholic`)(app);
 require(`${refPath}audio`)(app);
+require(`${refPath}psalm`)(app);
+require(`${refPath}novena`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 
