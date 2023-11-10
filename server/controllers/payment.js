@@ -60,8 +60,8 @@ module.exports = {
             item_list: {
               items: [
                 {
-                  name: "item",
-                  sku: "item",
+                  name: "donation",
+                  sku: "donation",
                   price: amount,
                   currency: currency,
                   quantity: 1,
@@ -72,7 +72,7 @@ module.exports = {
               currency: currency,
               total: amount,
             },
-            description: "This is the payment description.",
+            description: "Rosary Meditation Guide Donation",
           },
         ],
       };
