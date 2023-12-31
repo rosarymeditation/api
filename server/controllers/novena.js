@@ -35,6 +35,7 @@ module.exports = {
     try {
       const type = await PrayerType.findOne({ name: "NOVENA" });
       const { page = 1, limit = 20, code } = req.body;
+      limit = 30;
       console.log("Novena prayers");
       var findCode = await Language.findOne({
         code: code.toString(),
