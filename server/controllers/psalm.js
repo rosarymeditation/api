@@ -33,7 +33,7 @@ module.exports = {
 
   findAll: async (req, res) => {
     try {
-      const { page = 1, limit = 10, code } = req.body;
+      const { page = 1, limit = 30, code } = req.body;
       console.log(code);
       var findCode = await Language.findOne({
         code: code.toString(),

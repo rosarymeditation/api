@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const affirmationSchema = new mongoose.Schema({
   content: { type: String, required: true },
   date: { type: Date, required: true },
+  month: { type: String },
   formattedDate: { type: String },
   language: {
     type: mongoose.Schema.Types.ObjectId,

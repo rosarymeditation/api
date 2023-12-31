@@ -5,6 +5,7 @@ const dailyVerseSchema = new mongoose.Schema({
   verse: { type: String, required: true },
   date: { type: Date, required: true },
   formattedDate: { type: String },
+  month: { type: String },
   language: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Language",

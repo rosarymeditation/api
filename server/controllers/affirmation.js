@@ -14,189 +14,220 @@ module.exports = {
     const arr = [
       {
         content:
-          "Acepto la magia de la temporada navideña y difundo alegría a todos los que me rodean. El amor llena el aire.",
-        date: "2023-12-01T00:00:00",
+          "Hoy, acepto el cambio como un catalizador para el crecimiento y la transformación. Soy adaptable y recibo nuevas oportunidades con los brazos abiertos.",
+        date: "2014-03-01",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un faro de luz, iluminando el mundo con mi amabilidad, compasión y energía positiva. Soy radiante.",
-        date: "2023-12-02T00:00:00",
+          "Irradio positividad e inspiración a quienes me rodean. Mis acciones levantan a otros, difundiendo alegría y aliento sin esfuerzo.",
+        date: "2014-03-02",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy agradecido por la abundancia que me rodea. Cada día trae nuevas bendiciones y oportunidades para crecer.",
-        date: "2023-12-03T00:00:00",
+          "Mi resistencia no tiene límites. Cada contratiempo es un peldaño hacia mayores logros. Me levanto más fuerte y decidido cada vez.",
+        date: "2014-03-03",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Irradio calidez y amor, creando una atmósfera armoniosa para todos. Mi corazón está abierto y soy receptivo.",
-        date: "2023-12-04T00:00:00",
+          "Aprovecho el día, convirtiendo cada momento en un escalón hacia mis sueños y aspiraciones. Soy proactivo y determinado.",
+        date: "2014-03-04",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Confío en el viaje de la vida. Cada momento es una oportunidad para aprender, crecer y experimentar lo extraordinario.",
-        date: "2023-12-05T00:00:00",
+          "Con una determinación inquebrantable, alineo mis acciones con mis metas. Confío en mi camino y abrazo la senda que conduce a mi éxito.",
+        date: "2014-03-05",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal de paz, emanando tranquilidad para todos. Mi presencia aporta calma a cualquier situación.",
-        date: "2023-12-06T00:00:00",
+          "Cada día es una oportunidad para manifestar mis deseos. Soy un imán para el éxito y la abundancia en cada aspecto de mi vida.",
+        date: "2014-03-06",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy digno de todo el amor, éxito y abundancia que la vida tiene para ofrecer. Soy suficiente.",
-        date: "2023-12-07T00:00:00",
+          "El amor y la compasión guían mi corazón. Elijo la amabilidad y la empatía, creando armonía y comprensión en todas las interacciones.",
+        date: "2014-03-07",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy en constante evolución y me convierto en la mejor versión de mí mismo. Cada día es un paso adelante.",
-        date: "2023-12-08T00:00:00",
+          "Pinto cada día con pinceladas de gratitud y positividad. Atraigo sin esfuerzo el éxito y la abundancia a mi vida.",
+        date: "2014-03-08",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy abierto a recibir milagros y bendiciones. El universo tiene maravillosos planes para mí.",
-        date: "2023-12-09T00:00:00",
+          "Mi determinación es inquebrantable. Estoy comprometido a alcanzar mis metas, superando cualquier obstáculo que se interponga en mi camino.",
+        date: "2014-03-09",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy una fuente de inspiración y positividad. Mis palabras y acciones tienen un impacto significativo en los demás.",
-        date: "2023-12-10T00:00:00",
+          "Soy el arquitecto de mi destino, diseñando una vida llena de alegría y propósito. Soy capaz de lograr la grandeza.",
+        date: "2014-03-10",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un imán para las experiencias positivas. Mi vida está llena de momentos de alegría, amor y prosperidad.",
-        date: "2023-12-11T00:00:00",
+          "Doy la bienvenida a la abundancia en mi vida. El universo conspira a mi favor, presentándome oportunidades ilimitadas para el crecimiento y el éxito.",
+        date: "2014-03-11",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Confío en el momento divino del universo. Todo se está revelando para mi mayor bien.",
-        date: "2023-12-12T00:00:00",
+          "Mi determinación no tiene límites. Estoy enfocado, impulsado y me acerco más a mis sueños con cada día que pasa.",
+        date: "2014-03-12",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal de paz y serenidad. Mi presencia aporta calma a cualquier situación.",
-        date: "2023-12-13T00:00:00",
+          "La confianza y la positividad fluyen en mí sin esfuerzo. Atraigo el éxito y triunfo sobre los desafíos con facilidad.",
+        date: "2014-03-13",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy abierto a recibir orientación de mi sabiduría interior. Confío en mi intuición para guiarme.",
-        date: "2023-12-14T00:00:00",
+          "El amor es mi fuerza guía. Abrazo el amor en todas sus formas, difundiendo compasión y alegría donde quiera que vaya.",
+        date: "2014-03-14",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un faro de amor, irradiando calor y compasión a quienes me rodean. El amor es mi esencia.",
-        date: "2023-12-15T00:00:00",
+          "Tengo el poder de dar forma a mi realidad. Mis acciones conducen al éxito y atraigo la abundancia sin esfuerzo.",
+        date: "2014-03-15",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy abierto a recibir milagros. Los milagros son una parte natural de mi vida cotidiana.",
-        date: "2023-12-16T00:00:00",
+          "Cada experiencia es un peldaño hacia el crecimiento. Aprendo, me adapto y evoluciono hacia una versión más fuerte de mí mismo.",
+        date: "2014-03-16",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Libero todas las preocupaciones y abrazo la paz. Mi mente está tranquila y mi corazón está en paz.",
-        date: "2023-12-17T00:00:00",
+          "Irradio positividad, atrayendo positividad. Soy un faro de luz, inspirando a los demás con mi optimismo.",
+        date: "2014-03-17",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal de amor y luz divina. Irradio amor a todos los seres que me rodean.",
-        date: "2023-12-18T00:00:00",
+          "El éxito me sigue sin esfuerzo. Confío en mi camino y abrazo la abundancia que se presenta en mi vida.",
+        date: "2014-03-18",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy abierto a recibir abundancia en todas sus formas. La abundancia fluye hacia mí sin esfuerzo.",
-        date: "2023-12-19T00:00:00",
+          "Soy el autor de mi destino, escribiendo una historia de éxito, amor y gratitud. Atraigo abundancia con cada acción.",
+        date: "2014-03-19",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un faro de luz, llevando positividad y esperanza a quienes cruzan mi camino.",
-        date: "2023-12-20T00:00:00",
+          "Vivo en armonía con el universo, atrayendo positividad y éxito sin esfuerzo. Cada día es una oportunidad para crecer y celebrar.",
+        date: "2014-03-20",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal de paz, irradiando calma y serenidad al mundo. Estoy en paz.",
-        date: "2023-12-21T00:00:00",
+          "Cada día es un lienzo en blanco. Lo pinto con amor, gratitud y positividad. Soy el arquitecto de mi destino.",
+        date: "2014-03-21",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy digno de todo el amor, éxito y abundancia que la vida tiene para ofrecer. Soy suficiente.",
-        date: "2023-12-22T00:00:00",
+          "La gratitud llena mi corazón. Atraigo el éxito y la alegría con cada pensamiento positivo que tengo.",
+        date: "2014-03-22",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy en constante crecimiento y evolución. Cada día, me convierto en una mejor versión de mí mismo.",
-        date: "2023-12-23T00:00:00",
+          "Abrazo los desafíos como oportunidades de crecimiento. Cada obstáculo fortalece mi determinación y me impulsa hacia el éxito.",
+        date: "2014-03-23",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy abierto a recibir milagros y bendiciones. Confío en que el universo tiene planes maravillosos para mí.",
-        date: "2023-12-24T00:00:00",
+          "Soy el maestro de mis pensamientos y acciones. Manifiesto la abundancia y el éxito sin esfuerzo en mi vida.",
+        date: "2014-03-24",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal de paz y tranquilidad. Mi presencia aporta calma a quienes me rodean.",
-        date: "2023-12-25T00:00:00",
+          "Mi vida es un lienzo, y lo pinto con positividad y propósito. Atraigo éxito y realización sin esfuerzo.",
+        date: "2014-03-25",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Estoy rodeado de almas solidarias y amorosas. Aprecio las relaciones positivas en mi vida.",
-        date: "2023-12-26T00:00:00",
+          "Cada obstáculo es una oportunidad para crecer. Soy resiliente, superando desafíos con gracia y determinación.",
+        date: "2014-03-26",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy merecedor de todo lo bueno que la vida tiene para ofrecer. Acepto la abundancia con los brazos abiertos.",
-        date: "2023-12-27T00:00:00",
+          "Mi viaje está lleno de positividad y gratitud. Atraigo abundancia, éxito y alegría a mi vida sin esfuerzo.",
+        date: "2014-03-27",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Los desafíos son oportunidades para crecer. Enfrento la adversidad con valentía, saliendo más fuerte cada vez.",
-        date: "2023-12-28T00:00:00",
+          "Irradio confianza y atraigo éxito. Cada día es un paso hacia la realización de mis sueños.",
+        date: "2014-03-28",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un imán para los milagros. Los milagros me rodean y se manifiestan en mi vida todos los días.",
-        date: "2023-12-29T00:00:00",
+          "Soy el arquitecto de mi destino, creando una vida llena de amor, propósito y abundancia. El éxito me sigue sin esfuerzo.",
+        date: "2014-03-29",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Libero todas las preocupaciones y abrazo la paz. Mi mente está tranquila y mi corazón está en paz.",
-        date: "2023-12-30T00:00:00",
+          "Cada día es un regalo lleno de oportunidades ilimitadas. Acojo el éxito y la abundancia en mi vida.",
+        date: "2014-03-30",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Soy un canal para el amor y la luz divina. Irradio amor a todos los seres que me rodean.",
-        date: "2023-12-31T00:00:00",
+          "Soy capaz, merecedor y digno de alcanzar mis sueños. Atraigo positividad y éxito sin esfuerzo.",
+        date: "2014-03-31",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
     ];
 
@@ -211,6 +242,7 @@ module.exports = {
         const data = Affirmation({
           language: item.language,
           content: item.content,
+          month: item.month,
           date: item.date,
           formattedDate: da,
         });

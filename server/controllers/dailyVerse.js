@@ -14,216 +14,249 @@ module.exports = {
   create: async (req, res) => {
     const arr = [
       {
-        content: "El Señor es mi pastor, nada me falta.",
-        verse: "Salmo 23:1",
-        date: "2023-12-01",
+        content:
+          "Por lo tanto, si alguno está en Cristo, es una nueva creación. ¡Lo antiguo ha pasado, ha llegado ya lo nuevo!",
+        verse: "2 Corintios 5:17",
+        date: "2014-03-01",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content: "Encomienda al Señor tu camino; confía en él, y él actuará.",
+        verse: "Salmos 37:5",
+        date: "2014-03-02",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Y sabemos que en todas las cosas Dios obra para el bien de quienes lo aman, que han sido llamados según su propósito.",
-        verse: "Romanos 8:28",
-        date: "2023-12-02",
+          "El Señor es mi luz y mi salvación; ¿a quién temeré? El Señor es el baluarte de mi vida; ¿quién podrá amedrentarme?",
+        verse: "Salmos 27:1",
+        date: "2014-03-03",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "La paz de Dios, que sobrepasa todo entendimiento, cuidará sus corazones y sus pensamientos en Cristo Jesús.",
-        verse: "Filipenses 4:7",
-        date: "2023-12-03",
+          "Espera en el Señor; sé fuerte y valiente. ¡Espera en el Señor!",
+        verse: "Salmos 27:14",
+        date: "2014-03-04",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
-        content: "Alégrense siempre en el Señor. Insisto: ¡Alégrense!",
-        verse: "Filipenses 4:4",
-        date: "2023-12-04",
+        content:
+          "Confía en el Señor con todo tu corazón, y no te apoyes en tu propio entendimiento.",
+        verse: "Proverbios 3:5",
+        date: "2014-03-05",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content: "Todo lo puedo en Cristo que me fortalece.",
         verse: "Filipenses 4:13",
-        date: "2023-12-05",
+        date: "2014-03-06",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Pero el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fidelidad.",
-        verse: "Gálatas 5:22",
-        date: "2023-12-06",
+          "Ahora bien, sabemos que Dios dispone todas las cosas para el bien de quienes lo aman, los que han sido llamados según su propósito.",
+        verse: "Romanos 8:28",
+        date: "2014-03-07",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Pero el ángel les dijo: «No teman. Les traigo buenas noticias que serán motivo de mucha alegría para todo el pueblo.»",
-        verse: "Lucas 2:10",
-        date: "2023-12-07",
+          "Alégrense en la esperanza, muestren paciencia en el sufrimiento, perseveren en la oración.",
+        verse: "Romanos 12:12",
+        date: "2014-03-08",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Y ahora permanecen la fe, la esperanza y el amor, estos tres; pero el mayor de ellos es el amor.",
-        verse: "1 Corintios 13:13",
-        date: "2023-12-08",
+          "Más bien, busquen primeramente el reino de Dios y su justicia, y todas estas cosas les serán añadidas.",
+        verse: "Mateo 6:33",
+        date: "2014-03-09",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Cercano está el Señor a los quebrantados de corazón, y salva a los abatidos de espíritu.",
-        verse: "Salmo 34:18",
-        date: "2023-12-09",
+          "Que tu gran amor, Señor, nos acompañe, como también lo esperamos de ti.",
+        verse: "Salmos 33:22",
+        date: "2014-03-10",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Porque un niño nos ha nacido, un hijo nos ha sido dado, y la soberanía reposará sobre sus hombros. Se le darán estos nombres: Consejero admirable, Dios fuerte, Padre eterno, Príncipe de paz.",
-        verse: "Isaías 9:6",
-        date: "2023-12-10",
+          "Pongo siempre al Señor ante mí; con él a mi derecha, jamás seré conmovido.",
+        verse: "Salmos 16:8",
+        date: "2014-03-11",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "El Señor es mi luz y mi salvación, ¿a quién temeré? El Señor es el protector de mi vida, ¿de quién tendré miedo?",
-        verse: "Salmo 27:1",
-        date: "2023-12-11",
+          "El Señor es mi luz y mi salvación; ¿a quién temeré? El Señor es el baluarte de mi vida; ¿quién podrá amedrentarme?",
+        verse: "Salmos 27:1",
+        date: "2014-03-12",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Por tanto, el Señor mismo les dará señal: La virgen concebirá y dará a luz un hijo, y lo llamará Emanuel.",
-        verse: "Isaías 7:14",
-        date: "2023-12-12",
+          "Espera en el Señor; sé fuerte y valiente. ¡Espera en el Señor!",
+        verse: "Salmos 27:14",
+        date: "2014-03-13",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Considerémonos unos a otros para estimularnos al amor y a las buenas obras.",
-        verse: "Hebreos 10:24",
-        date: "2023-12-13",
+          "El temor del Señor es el principio de la sabiduría; el conocimiento del Santo es discernimiento.",
+        verse: "Proverbios 9:10",
+        date: "2014-03-14",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, sino que tenga vida eterna.",
-        verse: "Juan 3:16",
-        date: "2023-12-14",
+          "Confía en el Señor y haz el bien; así vivirás en la tierra y disfrutarás de seguridad.",
+        verse: "Salmos 37:3",
+        date: "2014-03-15",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "Deleita en el Señor, y él te concederá los deseos de tu corazón.",
+        verse: "Salmos 37:4",
+        date: "2014-03-16",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "Cercano está el Señor a los quebrantados de corazón, y salva a los de espíritu abatido.",
+        verse: "Salmos 34:18",
+        date: "2014-03-17",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "Sé fuerte y valiente. No tengas miedo ni te desanimes, porque el Señor tu Dios estará contigo dondequiera que vayas.",
+        verse: "Deuteronomio 31:6",
+        date: "2014-03-18",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "El Señor es mi fuerza y mi escudo; en él confía mi corazón. Con él fui ayudado, y mi corazón se alegró; con mi cántico le daré gracias.",
+        verse: "Salmos 28:7",
+        date: "2014-03-19",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "Tú guardarás en completa paz a aquel cuyo pensamiento en ti persevera; porque en ti ha confiado.",
+        verse: "Isaías 26:3",
+        date: "2014-03-20",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content:
+          "Bueno es el Señor; es refugio en el día de la angustia. Conoce a los que en él confían.",
+        verse: "Nahúm 1:7",
+        date: "2014-03-21",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
           "Que el Dios de la esperanza los llene de toda alegría y paz a ustedes que creen en él, para que rebosen de esperanza por el poder del Espíritu Santo.",
         verse: "Romanos 15:13",
-        date: "2023-12-15",
+        date: "2014-03-22",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Mas tú, Jehová, eres escudo alrededor de mí; mi gloria, y el que levanta mi cabeza.",
-        verse: "Salmo 3:3",
-        date: "2023-12-16",
+          "En cambio, el fruto del Espíritu es amor, alegría, paz, paciencia, amabilidad, bondad, fidelidad, humildad y dominio propio. No hay ley que condene estas cosas.",
+        verse: "Gálatas 5:22-23",
+        date: "2014-03-23",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Aquél era la verdadera luz, que alumbra a todo hombre que viene a este mundo.",
-        verse: "Juan 1:9",
-        date: "2023-12-17",
+          "Busqué al Señor, y él me respondió; me libró de todos mis temores.",
+        verse: "Salmos 34:4",
+        date: "2014-03-24",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres.",
-        verse: "Lucas 2:14",
-        date: "2023-12-18",
+          "No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y denle gracias.",
+        verse: "Filipenses 4:6",
+        date: "2014-03-25",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Por lo cual estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, ni potestades, ni lo presente, ni lo por venir, ni lo alto, ni lo profundo, ni ninguna otra cosa creada nos podrá separar del amor de Dios, que es en Cristo Jesús Señor nuestro.",
-        verse: "Romanos 8:38-39",
-        date: "2023-12-19",
+          "El Señor es mi roca, mi baluarte y mi libertador; mi Dios es mi roca, en quien encuentro protección. Él es mi escudo, el poder que me salva, ¡mi más alto escondite!",
+        verse: "Salmos 18:2",
+        date: "2014-03-26",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Toda buena dádiva y todo don perfecto desciende de lo alto, del Padre de las luces, en el cual no hay mudanza, ni sombra de variación.",
-        verse: "Santiago 1:17",
-        date: "2023-12-20",
+          "Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas: correrán y no se fatigarán, caminarán y no se cansarán.",
+        verse: "Isaías 40:31",
+        date: "2014-03-27",
         language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content: "En él estaba la vida, y la vida era la luz de los hombres.",
-        verse: "Juan 1:4",
-        date: "2023-12-21",
-        language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Clemente y misericordioso es el Señor; lento para la ira y grande en misericordia.",
-        verse: "Salmo 145:8",
-        date: "2023-12-22",
+          "Te instruiré y te enseñaré el camino que debes seguir; te aconsejaré y velaré por ti.",
+        verse: "Salmos 32:8",
+        date: "2014-03-28",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
+      },
+      {
+        content: "Él fortalece al cansado y acrecienta las fuerzas del débil.",
+        verse: "Isaías 40:29",
+        date: "2014-03-29",
+        language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Porque un niño nos ha nacido, un hijo nos ha sido dado, y la soberanía reposará sobre sus hombros. Se le darán estos nombres: Consejero admirable, Dios fuerte, Padre eterno, Príncipe de paz.",
-        verse: "Isaías 9:6",
-        date: "2023-12-23",
+          "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.",
+        verse: "Jeremías 29:11",
+        date: "2014-03-30",
         language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
       {
         content:
-          "Pero el ángel les dijo: «No teman. Les traigo buenas noticias que serán motivo de mucha alegría para todo el pueblo.»",
-        verse: "Lucas 2:10",
-        date: "2023-12-24",
+          "Confía en el Señor de todo corazón, y no en tu propia inteligencia.",
+        verse: "Proverbios 3:5",
+        date: "2014-03-31",
         language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "Y dará a luz un hijo, y le pondrás por nombre Jesús, porque él salvará a su pueblo de sus pecados.",
-        verse: "Mateo 1:21",
-        date: "2023-12-25",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "En el principio existía el Verbo, y el Verbo estaba con Dios, y el Verbo era Dios.",
-        verse: "Juan 1:1",
-        date: "2023-12-26",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "Y el Verbo se hizo carne y habitó entre nosotros, y vimos su gloria, gloria como del unigénito del Padre, lleno de gracia y de verdad.",
-        verse: "Juan 1:14",
-        date: "2023-12-27",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content: "¡Gracias a Dios por su don inefable!",
-        verse: "2 Corintios 9:15",
-        date: "2023-12-28",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "Pero tú, Belén Efrata, pequeña entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.",
-        verse: "Miqueas 5:2",
-        date: "2023-12-29",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "La virgen concebirá y dará a luz un hijo, y le pondrán por nombre Emanuel, que traducido es: Dios con nosotros.",
-        verse: "Mateo 1:23",
-        date: "2023-12-30",
-        language: "6502946f6a369b86e4f201f2",
-      },
-      {
-        content:
-          "Y el Verbo se hizo carne y habitó entre nosotros, y vimos su gloria, gloria como del unigénito del Padre, lleno de gracia y de verdad.",
-        verse: "Juan 1:14",
-        date: "2023-12-31",
-        language: "6502946f6a369b86e4f201f2",
+        month: "March",
       },
     ];
 
@@ -239,6 +272,7 @@ module.exports = {
           language: item.language,
           verse: item.verse,
           content: item.content,
+          month: item.month,
           date: item.date,
           formattedDate: da,
         });
@@ -296,7 +330,7 @@ module.exports = {
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
         .sort({ date: "asc" })
-        .populate("language");
+        .populate(language);
       return res.status(OK).send({ data: data });
     } catch (err) {
       console.log(err);

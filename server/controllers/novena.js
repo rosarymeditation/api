@@ -34,7 +34,7 @@ module.exports = {
   findAll: async (req, res) => {
     try {
       const type = await PrayerType.findOne({ name: "NOVENA" });
-      const { page = 1, limit = 10, code } = req.body;
+      const { page = 1, limit = 20, code } = req.body;
       console.log("Novena prayers");
       var findCode = await Language.findOne({
         code: code.toString(),
