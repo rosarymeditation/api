@@ -13,221 +13,196 @@ module.exports = {
   create: async (req, res) => {
     const arr = [
       {
-        content:
-          "Hoy, acepto el cambio como un catalizador para el crecimiento y la transformación. Soy adaptable y recibo nuevas oportunidades con los brazos abiertos.",
-        date: "2014-03-01",
+        content: "Acepto la belleza de cada nuevo día con gratitud y alegría.",
+        date: "2024-06-01",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
       {
         content:
-          "Irradio positividad e inspiración a quienes me rodean. Mis acciones levantan a otros, difundiendo alegría y aliento sin esfuerzo.",
-        date: "2014-03-02",
+          "Confío en mi capacidad para enfrentar cualquier desafío que surja.",
+        date: "2024-06-02",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Soy digno de amor y cariño tal como soy.",
+        date: "2024-06-03",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Mi resistencia no tiene límites. Cada contratiempo es un peldaño hacia mayores logros. Me levanto más fuerte y decidido cada vez.",
-        date: "2014-03-03",
+          "Soy un imán para la energía positiva y las buenas vibraciones.",
+        date: "2024-06-04",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Acepto el cambio y me adapto con facilidad y gracia.",
+        date: "2024-06-05",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Aprovecho el día, convirtiendo cada momento en un escalón hacia mis sueños y aspiraciones. Soy proactivo y determinado.",
-        date: "2014-03-04",
+          "Soy resiliente, fuerte y capaz de superar cualquier obstáculo.",
+        date: "2024-06-06",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Merezco todo el éxito y la felicidad que llegan a mi vida.",
+        date: "2024-06-07",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Atraigo abundancia en todas las áreas de mi vida.",
+        date: "2024-06-08",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Estoy rodeado de amor y positividad dondequiera que vaya.",
+        date: "2024-06-09",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Con una determinación inquebrantable, alineo mis acciones con mis metas. Confío en mi camino y abrazo la senda que conduce a mi éxito.",
-        date: "2014-03-05",
+          "Libero todo miedo y duda, reemplazándolos con confianza y certeza.",
+        date: "2024-06-10",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
       {
         content:
-          "Cada día es una oportunidad para manifestar mis deseos. Soy un imán para el éxito y la abundancia en cada aspecto de mi vida.",
-        date: "2014-03-06",
+          "Confío en que el universo tiene un plan para mí, y estoy exactamente donde necesito estar.",
+        date: "2024-06-11",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Soy capaz de crear la vida de mis sueños.",
+        date: "2024-06-12",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Irradio confianza, seguridad en mí mismo y paz interior.",
+        date: "2024-06-13",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Estoy abierto a recibir milagros y bendiciones inesperadas.",
+        date: "2024-06-14",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "El amor y la compasión guían mi corazón. Elijo la amabilidad y la empatía, creando armonía y comprensión en todas las interacciones.",
-        date: "2014-03-07",
+          "Dejo de lado los agravios del pasado y abrazo el perdón y la compasión.",
+        date: "2024-06-15",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Estoy lleno de gratitud por la abundancia en mi vida.",
+        date: "2024-06-16",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Confío en mis instintos y escucho mi sabiduría interior.",
+        date: "2024-06-17",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Pinto cada día con pinceladas de gratitud y positividad. Atraigo sin esfuerzo el éxito y la abundancia a mi vida.",
-        date: "2014-03-08",
+          "Soy digno de éxito y prosperidad en todos los aspectos de mi vida.",
+        date: "2024-06-18",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
       {
         content:
-          "Mi determinación es inquebrantable. Estoy comprometido a alcanzar mis metas, superando cualquier obstáculo que se interponga en mi camino.",
-        date: "2014-03-09",
+          "Atraigo experiencias positivas y enriquecedoras sin esfuerzo.",
+        date: "2024-06-19",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Dejo de preocuparme y abrazo la paz y la tranquilidad.",
+        date: "2024-06-20",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Soy el arquitecto de mi destino, diseñando una vida llena de alegría y propósito. Soy capaz de lograr la grandeza.",
-        date: "2014-03-10",
+          "Estoy en constante evolución y crecimiento hacia una mejor versión de mí mismo.",
+        date: "2024-06-21",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Confío en el tiempo de mi vida y me rindo al flujo divino.",
+        date: "2024-06-22",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Soy el maestro de mi destino y el capitán de mi alma.",
+        date: "2024-06-23",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Doy la bienvenida a la abundancia en mi vida. El universo conspira a mi favor, presentándome oportunidades ilimitadas para el crecimiento y el éxito.",
-        date: "2014-03-11",
+          "Libero toda negatividad y abrazo la positividad en cada momento.",
+        date: "2024-06-24",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
+      },
+      {
+        content: "Estoy abierto a recibir amor, bendiciones y milagros.",
+        date: "2024-06-25",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Estoy centrado, enraizado y en paz conmigo mismo.",
+        date: "2024-06-26",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
+      },
+      {
+        content: "Estoy rodeado de abundancia en todas sus formas.",
+        date: "2024-06-27",
+        language: "6502946f6a369b86e4f201f2",
+        month: "June",
       },
       {
         content:
-          "Mi determinación no tiene límites. Estoy enfocado, impulsado y me acerco más a mis sueños con cada día que pasa.",
-        date: "2014-03-12",
+          "Soy un poderoso creador, manifestando mis deseos con facilidad.",
+        date: "2024-06-28",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
       {
         content:
-          "La confianza y la positividad fluyen en mí sin esfuerzo. Atraigo el éxito y triunfo sobre los desafíos con facilidad.",
-        date: "2014-03-13",
+          "Soy digno de amor, respeto y bondad de mí mismo y de los demás.",
+        date: "2024-06-29",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
       {
-        content:
-          "El amor es mi fuerza guía. Abrazo el amor en todas sus formas, difundiendo compasión y alegría donde quiera que vaya.",
-        date: "2014-03-14",
+        content: "Confío en el universo para guiarme hacia mi mayor bien.",
+        date: "2024-06-30",
         language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Tengo el poder de dar forma a mi realidad. Mis acciones conducen al éxito y atraigo la abundancia sin esfuerzo.",
-        date: "2014-03-15",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Cada experiencia es un peldaño hacia el crecimiento. Aprendo, me adapto y evoluciono hacia una versión más fuerte de mí mismo.",
-        date: "2014-03-16",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Irradio positividad, atrayendo positividad. Soy un faro de luz, inspirando a los demás con mi optimismo.",
-        date: "2014-03-17",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "El éxito me sigue sin esfuerzo. Confío en mi camino y abrazo la abundancia que se presenta en mi vida.",
-        date: "2014-03-18",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Soy el autor de mi destino, escribiendo una historia de éxito, amor y gratitud. Atraigo abundancia con cada acción.",
-        date: "2014-03-19",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Vivo en armonía con el universo, atrayendo positividad y éxito sin esfuerzo. Cada día es una oportunidad para crecer y celebrar.",
-        date: "2014-03-20",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Cada día es un lienzo en blanco. Lo pinto con amor, gratitud y positividad. Soy el arquitecto de mi destino.",
-        date: "2014-03-21",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "La gratitud llena mi corazón. Atraigo el éxito y la alegría con cada pensamiento positivo que tengo.",
-        date: "2014-03-22",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Abrazo los desafíos como oportunidades de crecimiento. Cada obstáculo fortalece mi determinación y me impulsa hacia el éxito.",
-        date: "2014-03-23",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Soy el maestro de mis pensamientos y acciones. Manifiesto la abundancia y el éxito sin esfuerzo en mi vida.",
-        date: "2014-03-24",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Mi vida es un lienzo, y lo pinto con positividad y propósito. Atraigo éxito y realización sin esfuerzo.",
-        date: "2014-03-25",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Cada obstáculo es una oportunidad para crecer. Soy resiliente, superando desafíos con gracia y determinación.",
-        date: "2014-03-26",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Mi viaje está lleno de positividad y gratitud. Atraigo abundancia, éxito y alegría a mi vida sin esfuerzo.",
-        date: "2014-03-27",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Irradio confianza y atraigo éxito. Cada día es un paso hacia la realización de mis sueños.",
-        date: "2014-03-28",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Soy el arquitecto de mi destino, creando una vida llena de amor, propósito y abundancia. El éxito me sigue sin esfuerzo.",
-        date: "2014-03-29",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Cada día es un regalo lleno de oportunidades ilimitadas. Acojo el éxito y la abundancia en mi vida.",
-        date: "2014-03-30",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
-      },
-      {
-        content:
-          "Soy capaz, merecedor y digno de alcanzar mis sueños. Atraigo positividad y éxito sin esfuerzo.",
-        date: "2014-03-31",
-        language: "6502946f6a369b86e4f201f2",
-        month: "March",
+        month: "June",
       },
     ];
 
