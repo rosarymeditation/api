@@ -91,6 +91,7 @@ require(`${refPath}novena`)(app);
 require(`${refPath}log`)(app);
 require(`${refPath}payment`)(app);
 require(`${refPath}prayerRequest`)(app);
+require(`${refPath}distress`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 
