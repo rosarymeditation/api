@@ -92,6 +92,8 @@ require(`${refPath}log`)(app);
 require(`${refPath}payment`)(app);
 require(`${refPath}prayerRequest`)(app);
 require(`${refPath}distress`)(app);
+require(`${refPath}product`)(app);
+require(`${refPath}terms`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 

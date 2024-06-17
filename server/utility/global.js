@@ -27,7 +27,7 @@ function randomAlpabet() {
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
-
+let formatSlug = (str) => str.replace(/ /g, "_");
 function getConvertedDate() {
   let options = {
     timeZone: "Europe/London",
@@ -229,5 +229,6 @@ module.exports = {
   randomAlpabet,
   getConvertedDate,
   rand,
+  formatSlug,
   CapitalizeFirstLetter,
 };

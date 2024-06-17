@@ -4,6 +4,7 @@
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const PrayerRequest = require("../models/prayerRequest");
+const PrayerRequestCounter = require("../models/prayerRequestCounter");
 const FeedStatus = require("../models/feedStatus");
 const FeedLike = require("../models/feedLikes");
 const User = require("../models/user");
@@ -37,6 +38,7 @@ module.exports = {
       // });
       return res.status(OK).send({ error: false });
     } catch (err) {
+      console.log(err);
       return res.status(OK).send({ error: true });
     }
   },
@@ -48,10 +50,53 @@ module.exports = {
       const data = await PrayerRequest.find()
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
-        .sort({ createdAt: "desc" });
+        .sort({ createdAt: "desc" })
+        .populate("counter");
       return res.status(OK).send({ data: data });
     } catch (err) {
       return res.status(SERVER_ERROR).send({ error: true, message: err });
     }
   },
+  assistPrayer: async (req, res) => {
+    try {
+      const { prayerId, randomToken } = req.body;
+      const getPrayerCounter = await PrayerRequestCounter.find({
+        randomToken,
+        _id: prayerId,
+      });
+
+      let result = {};
+
+      if (getPrayerCounter.length < 6) {
+        const data = PrayerRequestCounter({
+          randomToken: randomToken,
+          requestId: prayerId,
+        });
+        data.save().then(async (result) => {
+          PrayerRequest.findByIdAndUpdate(
+            { _id: prayerId },
+            { $push: { counter: result } }
+          ).exec();
+        });
+      } else {
+      }
+
+      return res.status(OK).send({ error: false });
+    } catch (err) {
+      console.log(err);
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+  // assistPrayer: async (req, res) => {
+  //   try {
+  //     const data = await PrayerRequest.find()
+  //       .skip((page - 1) * limit) // Skip documents based on the current page
+  //       .limit(limit)
+  //       .sort({ createdAt: "desc" });
+  //     return res.status(OK).send({ data: data });
+  //   } catch (err) {
+  //     return res.status(SERVER_ERROR).send({ error: true, message: err });
+  //   }
+  // },
 };

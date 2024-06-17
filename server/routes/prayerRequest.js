@@ -3,6 +3,7 @@ const { rootUrl } = require("../utility/constants");
 module.exports = (app) => {
   app.post(rootUrl("submit-prayer-request"), controller.create);
   app.post(rootUrl("all-prayer-request"), controller.findAll);
+  app.post(rootUrl("assist-prayer"), controller.assistPrayer);
   //   app.get(rootUrl("categories"), controller.findAll);
 
   //   app.post(rootUrl("categoriesByPopular"), controller.findByPopular);
