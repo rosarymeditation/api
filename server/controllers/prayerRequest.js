@@ -62,7 +62,7 @@ module.exports = {
       const { prayerId, randomToken } = req.body;
       const getPrayerCounter = await PrayerRequestCounter.find({
         randomToken,
-        _id: prayerId,
+        requestId: prayerId,
       });
 
       let result = {};
