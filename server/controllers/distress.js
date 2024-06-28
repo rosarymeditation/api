@@ -54,6 +54,24 @@ module.exports = {
     }
   },
 
+  findAllAdmin: async (req, res) => {
+    try {
+      const { page = 1, limit = 100, code } = req.body;
+    
+
+      // console.log(findCode._id);
+      const data = await Distress.find()
+        .skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit)
+        .sort({ title: 1 })
+        .populate("language");
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+
   delete: async (req, res) => {
     try {
       const id = req.params.id;
@@ -64,15 +82,50 @@ module.exports = {
     }
   },
 
+  // update: async (req, res) => {
+  //   try {
+  //     const id = req.params.id;
+
+  //     const { content, langauge, title } = req.body;
+  //     const updatedData = {
+  //       content: content,
+  //       langauge: langauge,
+  //       title: title,
+  //     };
+  //     updatedData.hasUpdated = true;
+  //     const options = { new: true };
+
+  //     const result = await Distress.findByIdAndUpdate(id, updatedData, options);
+
+  //     return res.status(OK).send({ error: false, result });
+  //   } catch (err) {
+  //     return res.status(OK).send({ error: true, message: err });
+  //   }
+  // },
+  findById: async (req, res) => {
+    try {
+      let { id } = req.body;
+     
+      const data = await Distress.findById(id);
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
+     console.log(req.body)
+      const photoObject = req.file;
+      const photo = photoObject ? req.file.location : null;
 
-      const { content, langauge, title } = req.body;
+      const { title, content, langauge, id } = req.body;
+      const findByOne = Distress.findById(id);
       const updatedData = {
+        title: title,
         content: content,
         langauge: langauge,
-        title: title,
+        url: photo || findByOne.url,
       };
       updatedData.hasUpdated = true;
       const options = { new: true };

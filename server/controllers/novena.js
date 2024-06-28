@@ -53,6 +53,35 @@ module.exports = {
     }
   },
 
+  findAllAdmin: async (req, res) => {
+    try {
+      const type = await PrayerType.findOne({ name: "NOVENA" });
+      let { page = 1, limit = 100 } = req.body;
+
+      const data = await Prayer.find()
+        .skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit)
+        .sort({ title: "asc" })
+        .populate("language")
+        .populate("type");
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+  findById: async (req, res) => {
+    try {
+      let { id } = req.body;
+     
+      const data = await Prayer.findById(id);
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+
   delete: async (req, res) => {
     try {
       const id = req.params.id;
@@ -84,4 +113,6 @@ module.exports = {
       return res.status(OK).send({ error: true, message: err });
     }
   },
+
+  
 };

@@ -52,6 +52,27 @@ module.exports = {
     }
   },
 
+  findAllAdmin: async (req, res) => {
+    try {
+      let { page = 1, limit = 100, code } = req.body;
+     
+      // console.log(code);
+      // var findCode = await Language.findOne({
+      //   code: code.toString(),
+      // });
+
+      // console.log(findCode._id);
+      const data = await Psalm.find()
+        .skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit)
+        .sort({ title: "asc" });
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+
   delete: async (req, res) => {
     try {
       const id = req.params.id;
@@ -61,17 +82,29 @@ module.exports = {
       return res.status(OK).send({ error: true, message: err });
     }
   },
-
+  findById: async (req, res) => {
+    try {
+      let { id } = req.body;
+     
+      const data = await Psalm.findById(id);
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
+    
+      
 
-      const { title, content, langauge, verse } = req.body;
+      const { title, content, langauge, verse, id } = req.body;
+     
       const updatedData = {
         title: title,
         content: content,
         langauge: langauge,
-        verse,
+        verse:verse,
       };
       updatedData.hasUpdated = true;
       const options = { new: true };

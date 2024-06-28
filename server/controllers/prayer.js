@@ -15,14 +15,14 @@ module.exports = {
     try {
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
-      const type = await PrayerType.findOne({ name: "OTHERS" });
-      const { content, title, language } = req.body;
+      //const type = await PrayerType.findOne({ name: "OTHERS" });
+      const { content, title, language, type } = req.body;
       const data = Prayer({
         title: title,
         language: language,
         content: content,
-        type: type._id,
-        url: photo || "",
+        type: type,
+        url: photo ,
       });
       await data.save();
 
@@ -67,15 +67,18 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      const id = req.params.id;
+     console.log(req.body)
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
-      const { title, content, langauge } = req.body;
+
+      const { title, content, langauge, type, id } = req.body;
+      const findPrayer = Prayer.findById(id);
       const updatedData = {
         title: title,
         content: content,
         langauge: langauge,
-        url: photo || "",
+        type:type,
+        url: photo || findPrayer.url,
       };
       updatedData.hasUpdated = true;
       const options = { new: true };
