@@ -64,7 +64,7 @@ module.exports = {
       // console.log(findCode._id);
       const data = await Psalm.find()
         .skip((page - 1) * limit) // Skip documents based on the current page
-        .limit(limit)
+        .limit(limit).populate("language")
         .sort({ title: "asc" });
       return res.status(OK).send({ data: data });
     } catch (err) {
