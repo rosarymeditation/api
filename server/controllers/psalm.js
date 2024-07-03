@@ -44,7 +44,7 @@ module.exports = {
       const data = await Psalm.find({ language: findCode._id })
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
-        .sort({ title: "asc" });
+        .sort({ verseNum: 1 });
       return res.status(OK).send({ data: data });
     } catch (err) {
       console.log(err);
@@ -55,7 +55,7 @@ module.exports = {
   findAllAdmin: async (req, res) => {
     try {
       let { page = 1, limit = 100, code } = req.body;
-     
+
       // console.log(code);
       // var findCode = await Language.findOne({
       //   code: code.toString(),
@@ -64,8 +64,9 @@ module.exports = {
       // console.log(findCode._id);
       const data = await Psalm.find()
         .skip((page - 1) * limit) // Skip documents based on the current page
-        .limit(limit).populate("language")
-        .sort({ title: "asc" });
+        .limit(limit)
+        .populate("language")
+        .sort({ verseNum: 1 });
       return res.status(OK).send({ data: data });
     } catch (err) {
       console.log(err);
@@ -85,7 +86,7 @@ module.exports = {
   findById: async (req, res) => {
     try {
       let { id } = req.body;
-     
+
       const data = await Psalm.findById(id);
       return res.status(OK).send({ data: data });
     } catch (err) {
@@ -95,16 +96,13 @@ module.exports = {
   },
   update: async (req, res) => {
     try {
-    
-      
-
       const { title, content, langauge, verse, id } = req.body;
-     
+
       const updatedData = {
         title: title,
         content: content,
         langauge: langauge,
-        verse:verse,
+        verse: verse,
       };
       updatedData.hasUpdated = true;
       const options = { new: true };
@@ -112,6 +110,27 @@ module.exports = {
       const result = await Psalm.findByIdAndUpdate(id, updatedData, options);
 
       return res.status(OK).send({ error: false, result });
+    } catch (err) {
+      return res.status(OK).send({ error: true, message: err });
+    }
+  },
+
+  updateAll: async (req, res) => {
+    try {
+      const allPsalms = await Psalm.find();
+      allPsalms.forEach(async (item) => {
+        const number = parseInt(item.verse.match(/\d+/)[0]);
+        console.log(number);
+        const updatedData = {
+          verseNum: parseInt(number),
+        };
+        updatedData.hasUpdated = true;
+        const options = { new: true };
+
+        const result = await Psalm.findByIdAndUpdate(item._id, updatedData, options);
+      });
+
+      return res.status(OK).send({ error: false });
     } catch (err) {
       return res.status(OK).send({ error: true, message: err });
     }
