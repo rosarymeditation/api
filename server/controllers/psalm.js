@@ -15,12 +15,13 @@ module.exports = {
       console.log("kekekekkekek");
       const { content, title, language, verse } = req.body;
       console.log(req.body);
-
+      const number = parseInt(verse.match(/\d+/)[0]);
       const data = Psalm({
         language: language,
         title: title,
         content: content,
         verse,
+        verseNum:number
       });
       await data.save();
 

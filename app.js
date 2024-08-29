@@ -94,6 +94,7 @@ require(`${refPath}prayerRequest`)(app);
 require(`${refPath}distress`)(app);
 require(`${refPath}product`)(app);
 require(`${refPath}terms`)(app);
+require(`${refPath}dailyReading`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 
