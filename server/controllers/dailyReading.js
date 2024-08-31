@@ -101,9 +101,18 @@ module.exports = {
       //const reading = await getDailyReadings("28/08/2024", "English");
       // console.log("kekekekkekek");
       const { content, summary, language, date } = req.body;
-
+      const targetDate = new Date(date);
       const type = getLiturgicalPeriod(new Date(date));
-      console.log(req.body);
+      const findReading = await DailyReading.findOne({
+        language: language,
+        type: type,
+        date: targetDate,
+      });
+      if (findReading) {
+        console.log("Duplicate");
+        return res.status(OK).send({ error: true, message: "Duplicate" });
+      }
+
       const data = DailyReading({
         language: language,
         type: type,
@@ -113,7 +122,9 @@ module.exports = {
       });
       await data.save();
 
-      return res.status(OK).send(data);
+      return res
+        .status(OK)
+        .send({ error: false, message: "Saved Successfully" });
     } catch (err) {
       console.log(err);
       return res.status(SERVER_ERROR).send({ error: true });

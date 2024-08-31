@@ -125,6 +125,7 @@ module.exports = {
         .populate("comments");
       return res.status(OK).send({ data: data });
     } catch (err) {
+      console.log(err);
       return res.status(SERVER_ERROR).send({ error: true, message: err });
     }
   },
