@@ -22,14 +22,14 @@ module.exports = {
         language: language,
         content: content,
         type: type,
-        url: photo ,
+        url: photo,
       });
       await data.save();
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
 
@@ -48,10 +48,10 @@ module.exports = {
         .limit(limit)
         .sort({ title: "asc" })
         .populate("language");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -59,15 +59,15 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await Prayer.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
   update: async (req, res) => {
     try {
-     console.log(req.body)
+      console.log(req.body);
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
 
@@ -77,7 +77,7 @@ module.exports = {
         title: title,
         content: content,
         langauge: langauge,
-        type:type,
+        type: type,
         url: photo || findPrayer.url,
       };
       updatedData.hasUpdated = true;
@@ -85,9 +85,9 @@ module.exports = {
 
       const result = await Prayer.findByIdAndUpdate(id, updatedData, options);
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

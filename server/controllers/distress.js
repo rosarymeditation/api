@@ -15,7 +15,7 @@ module.exports = {
     const photoObject = req.file;
     const photo = photoObject ? req.file.location : null;
     if (title == null || content == null) {
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
     try {
       const data = Distress({
@@ -26,10 +26,10 @@ module.exports = {
       });
       await data.save();
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
 
@@ -47,17 +47,16 @@ module.exports = {
         .limit(limit)
         .sort({ title: 1 })
         .populate("language");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
   findAllAdmin: async (req, res) => {
     try {
       const { page = 1, limit = 100, code } = req.body;
-    
 
       // console.log(findCode._id);
       const data = await Distress.find()
@@ -65,10 +64,10 @@ module.exports = {
         .limit(limit)
         .sort({ title: 1 })
         .populate("language");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -76,9 +75,9 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await Distress.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -105,17 +104,17 @@ module.exports = {
   findById: async (req, res) => {
     try {
       let { id } = req.body;
-     
+
       const data = await Distress.findById(id);
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
   update: async (req, res) => {
     try {
-     console.log(req.body)
+      console.log(req.body);
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
 
@@ -132,9 +131,9 @@ module.exports = {
 
       const result = await Distress.findByIdAndUpdate(id, updatedData, options);
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

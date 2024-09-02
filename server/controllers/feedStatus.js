@@ -21,9 +21,9 @@ module.exports = {
       });
       await data.save();
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
 
     // const data = await Feed.findOne({ author: userId })

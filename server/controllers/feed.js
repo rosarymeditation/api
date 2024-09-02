@@ -57,9 +57,9 @@ module.exports = {
           console.log("That's wassup!");
         }
       });
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
   sendMessage: async (req, res) => {},
@@ -72,7 +72,7 @@ module.exports = {
         const data = await FeedLike.findByIdAndDelete(findLike._id);
         return res
           .status(OK)
-          .send({ error: false, isForDelete: true, userId: userId });
+          .json({ error: false, isForDelete: true, userId: userId });
       } else {
         const data = FeedLike({
           user: userId,
@@ -86,10 +86,10 @@ module.exports = {
 
         return res
           .status(OK)
-          .send({ error: false, isForDelete: false, userId: userId });
+          .json({ error: false, isForDelete: false, userId: userId });
       }
     } catch (err) {
-      return res.status(OK).send({ error: true, isForDelete: false });
+      return res.status(OK).json({ error: true, isForDelete: false });
     }
   },
 
@@ -105,9 +105,9 @@ module.exports = {
         .populate("status")
         .populate("likes")
         .populate("comments");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -123,10 +123,10 @@ module.exports = {
         .populate("status")
         .populate("likes")
         .populate("comments");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -134,9 +134,9 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await Feed.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -156,9 +156,9 @@ module.exports = {
 
       const result = await Feed.findByIdAndUpdate(id, updatedData, options);
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

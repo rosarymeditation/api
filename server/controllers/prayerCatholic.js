@@ -26,10 +26,10 @@ module.exports = {
       });
       await data.save();
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
   findAll: async (req, res) => {
@@ -52,7 +52,7 @@ module.exports = {
       return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -60,9 +60,9 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await Prayer.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -83,9 +83,9 @@ module.exports = {
 
       const result = await Prayer.findByIdAndUpdate(id, updatedData, options);
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

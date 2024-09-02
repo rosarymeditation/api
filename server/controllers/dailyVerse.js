@@ -42,10 +42,10 @@ module.exports = {
         await data.save();
       });
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
   todayVerse: async (req, res) => {
@@ -87,10 +87,10 @@ module.exports = {
         };
       }
 
-      return res.status(OK).send(data);
+      return res.status(OK).json(data);
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
   findAll: async (req, res) => {
@@ -107,10 +107,10 @@ module.exports = {
         .limit(limit)
         .sort({ date: "asc" })
         .populate(language);
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -118,9 +118,9 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await DailyVerse.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -142,9 +142,9 @@ module.exports = {
         options
       );
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

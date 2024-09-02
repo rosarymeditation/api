@@ -21,14 +21,14 @@ module.exports = {
         title: title,
         content: content,
         verse,
-        verseNum:number
+        verseNum: number,
       });
       await data.save();
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true });
+      return res.status(SERVER_ERROR).json({ error: true });
     }
   },
 
@@ -46,10 +46,10 @@ module.exports = {
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
         .sort({ verseNum: 1 });
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -68,10 +68,10 @@ module.exports = {
         .limit(limit)
         .populate("language")
         .sort({ verseNum: 1 });
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
 
@@ -79,9 +79,9 @@ module.exports = {
     try {
       const id = req.params.id;
       const data = await Psalm.findByIdAndDelete(id);
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
   findById: async (req, res) => {
@@ -89,10 +89,10 @@ module.exports = {
       let { id } = req.body;
 
       const data = await Psalm.findById(id);
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
   update: async (req, res) => {
@@ -110,9 +110,9 @@ module.exports = {
 
       const result = await Psalm.findByIdAndUpdate(id, updatedData, options);
 
-      return res.status(OK).send({ error: false, result });
+      return res.status(OK).json({ error: false, result });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 
@@ -128,12 +128,16 @@ module.exports = {
         updatedData.hasUpdated = true;
         const options = { new: true };
 
-        const result = await Psalm.findByIdAndUpdate(item._id, updatedData, options);
+        const result = await Psalm.findByIdAndUpdate(
+          item._id,
+          updatedData,
+          options
+        );
       });
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
-      return res.status(OK).send({ error: true, message: err });
+      return res.status(OK).json({ error: true, message: err });
     }
   },
 };

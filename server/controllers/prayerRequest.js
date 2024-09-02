@@ -29,17 +29,17 @@ module.exports = {
       });
       await data.save();
 
-      // sgMail.send(msg, (error, result) => {
+      // sgMail.json(msg, (error, result) => {
       //   if (error) {
       //     console.log(error);
       //   } else {
       //     console.log("That's wassup!");
       //   }
       // });
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
-      return res.status(OK).send({ error: true });
+      return res.status(OK).json({ error: true });
     }
   },
 
@@ -52,9 +52,9 @@ module.exports = {
         .limit(limit)
         .sort({ createdAt: "desc" })
         .populate("counter");
-      return res.status(OK).send({ data: data });
+      return res.status(OK).json({ data: data });
     } catch (err) {
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
   assistPrayer: async (req, res) => {
@@ -81,11 +81,11 @@ module.exports = {
       } else {
       }
 
-      return res.status(OK).send({ error: false });
+      return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
       console.log(err);
-      return res.status(SERVER_ERROR).send({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
   // assistPrayer: async (req, res) => {
@@ -94,9 +94,9 @@ module.exports = {
   //       .skip((page - 1) * limit) // Skip documents based on the current page
   //       .limit(limit)
   //       .sort({ createdAt: "desc" });
-  //     return res.status(OK).send({ data: data });
+  //     return res.status(OK).json({ data: data });
   //   } catch (err) {
-  //     return res.status(SERVER_ERROR).send({ error: true, message: err });
+  //     return res.status(SERVER_ERROR).json({ error: true, message: err });
   //   }
   // },
 };
