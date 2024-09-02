@@ -33,6 +33,7 @@ module.exports = {
     }
   },
   findAll: async (req, res) => {
+    console.log(req.body);
     try {
       const type = await PrayerType.findOne({ name: "CATHOLIC" });
       const { page = 1, limit = 10, code } = req.body;
@@ -47,6 +48,7 @@ module.exports = {
         .limit(limit)
         .sort({ title: "asc" })
         .populate("language");
+      console.log(data);
       return res.status(OK).send({ data: data });
     } catch (err) {
       console.log(err);
