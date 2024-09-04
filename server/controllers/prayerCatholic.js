@@ -48,7 +48,7 @@ module.exports = {
         .limit(limit)
         .sort({ title: "asc" })
         .populate("language");
-      console.log(data);
+
       return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
