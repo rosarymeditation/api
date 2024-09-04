@@ -45,7 +45,7 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      console.log(req.params.id);
+      // console.log(req.params.id);
 
       const { name, code } = req.body;
       const updatedData = {

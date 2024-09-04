@@ -142,7 +142,7 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      console.log(req.params.id);
+      //console.log(req.params.id);
       const id = req.params.id;
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;

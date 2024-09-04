@@ -65,7 +65,7 @@ module.exports = {
               userId: data.id,
             });
           } catch (err) {
-            console.log(err);
+            //console.log(err);
             return res.status(SERVER_ERROR).send({
               error: true,
               message: err,
@@ -129,7 +129,7 @@ module.exports = {
       if (req.files && req.files.banner) {
         formBody.banner = req.files.banner[0].location;
       }
-      console.log(req.body);
+      // console.log(req.body);
       const data = await User.findByIdAndUpdate(id, formBody, options);
       return res.status(OK).send(data);
     } catch (err) {
@@ -188,10 +188,10 @@ module.exports = {
 
   sendForgotPasswordCode: async (req, res) => {
     const { email } = req.body;
-    console.log(email);
+    //console.log(email);
     try {
       const findUser = await User.findOne({ email: email, hasDeleted: false });
-      console.log(findUser);
+      /// console.log(findUser);
       if (findUser) {
         const options = { new: true };
         const code = Math.floor(Math.random() * 9000) + 1000;
@@ -212,9 +212,9 @@ module.exports = {
 
         sgMail.send(msg, (error, result) => {
           if (error) {
-            console.log(error);
+            // console.log(error);
           } else {
-            console.log("That's wassup!");
+            // console.log("That's wassup!");
           }
         });
         return res.status(OK).send({ message: "Successful" });
@@ -271,7 +271,7 @@ module.exports = {
               userId: data.id,
             });
           } catch (err) {
-            console.log(err);
+            // console.log(err);
             return res.status(SERVER_ERROR).send({
               error: true,
               message: err,
@@ -289,17 +289,17 @@ module.exports = {
   passwordVerification: async (req, res) => {
     try {
       const { email, code } = req.body;
-      console.log(`code: ${code}   email: ${email}`);
+      // console.log(`code: ${code}   email: ${email}`);
       const findUser = await User.findOne({ email, verifyCode: code });
 
       if (!findUser) {
-        console.log("No    email----");
+       /// console.log("No    email----");
         return res.status(VALIDATION_ERROR).send({
           error: true,
           message: "Code does not exist",
         });
       } else {
-        console.log("Yesyshshshhs");
+       // console.log("Yesyshshshhs");
         return res.status(OK).send({ message: "Successful", error: false });
       }
     } catch (err) {
@@ -326,7 +326,7 @@ module.exports = {
             .send({ message: "Error", error: true });
         } else {
           const options = { new: true };
-          console.log("0300404040040i0000------00595959");
+         // console.log("0300404040040i0000------00595959");
           const user = await User.findByIdAndUpdate(
             findUser._id,
             { password: hash, verifyCode: "" },

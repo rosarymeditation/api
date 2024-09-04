@@ -36,7 +36,7 @@ module.exports = {
       const type = await PrayerType.findOne({ name: "NOVENA" });
       let { page = 1, limit = 20, code } = req.body;
       limit = 30;
-      console.log("Novena prayers");
+      // console.log("Novena prayers");
       var findCode = await Language.findOne({
         code: code.toString(),
       });
@@ -48,7 +48,7 @@ module.exports = {
         .populate("language");
       return res.status(OK).json({ data: data });
     } catch (err) {
-      console.log(err);
+     // console.log(err);
       return res.status(SERVER_ERROR).json({ error: true, message: err });
     }
   },
@@ -73,7 +73,7 @@ module.exports = {
   findById: async (req, res) => {
     try {
       let { id } = req.body;
-     
+
       const data = await Prayer.findById(id);
       return res.status(OK).json({ data: data });
     } catch (err) {
@@ -113,6 +113,4 @@ module.exports = {
       return res.status(OK).json({ error: true, message: err });
     }
   },
-
-  
 };

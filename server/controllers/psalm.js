@@ -36,12 +36,12 @@ module.exports = {
     try {
       let { page = 1, limit = 30, code } = req.body;
       limit = 30;
-      console.log(code);
+      //  console.log(code);
       var findCode = await Language.findOne({
         code: code.toString(),
       });
 
-      console.log(findCode._id);
+      //  console.log(findCode._id);
       const data = await Psalm.find({ language: findCode._id })
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
@@ -121,7 +121,7 @@ module.exports = {
       const allPsalms = await Psalm.find();
       allPsalms.forEach(async (item) => {
         const number = parseInt(item.verse.match(/\d+/)[0]);
-        console.log(number);
+        // console.log(number);
         const updatedData = {
           verseNum: parseInt(number),
         };

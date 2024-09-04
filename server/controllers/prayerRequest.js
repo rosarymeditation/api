@@ -22,7 +22,7 @@ module.exports = {
   create: async (req, res) => {
     try {
       const { content, name } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       const data = PrayerRequest({
         content: content,
         name: name || "Anonymous",
@@ -38,7 +38,7 @@ module.exports = {
       // });
       return res.status(OK).json({ error: false });
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       return res.status(OK).json({ error: true });
     }
   },

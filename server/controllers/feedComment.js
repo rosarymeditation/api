@@ -24,7 +24,7 @@ module.exports = {
         feed: feedId,
       });
       data.save().then(async (result) => {
-        console.log(result);
+        // console.log(result);
         Feed.findByIdAndUpdate(
           { _id: feedId },
           { $push: { comments: result } }
@@ -87,8 +87,8 @@ module.exports = {
       const updatedData = req.body;
       updatedData.hasUpdated = true;
       const options = { new: true };
-      console.log(req.body);
-      console.log(id);
+      // console.log(req.body);
+      // console.log(id);
       const result = await FeedComment.findByIdAndUpdate(
         { _id: id },
         updatedData,

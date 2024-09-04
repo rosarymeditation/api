@@ -33,16 +33,16 @@ module.exports = {
     }
   },
   findAll: async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     try {
       const type = await PrayerType.findOne({ name: "CATHOLIC" });
       const { page = 1, limit = 10, code } = req.body;
-      console.log(code);
+      // console.log(code);
       var findCode = await Language.findOne({
         code: code.toString(),
       });
 
-      console.log(findCode._id);
+      // console.log(findCode._id);
       const data = await Prayer.find({ language: findCode._id, type: type._id })
         .skip((page - 1) * limit) // Skip documents based on the current page
         .limit(limit)
