@@ -1,8 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
 const Sentry = require("@sentry/node");
-const ProfilingIntegration = require("@sentry/profiling-node");
-const path = require("path");
 const bodyParser = require("body-parser");
 
 require("dotenv").config();
@@ -13,28 +11,28 @@ const app = express();
 
 app.use(cors());
 // Log requests to the console.
-app.use(logger("dev"));
+//app.use(logger("dev"));
 
-Sentry.init({
-  dsn: "https://62697854002c3b3789e0737992f31a9a@o1324264.ingest.sentry.io/4505894487457792",
-  integrations: [
-    // enable HTTP calls tracing
-    new Sentry.Integrations.Http({ tracing: true }),
-    // enable Express.js middleware tracing
-    new Sentry.Integrations.Express({ app }),
-  ],
-  // Performance Monitoring
-  tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
-  // Set sampling rate for profiling - this is relative to tracesSampleRate
-  profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
-});
+// Sentry.init({
+//   dsn: "https://62697854002c3b3789e0737992f31a9a@o1324264.ingest.sentry.io/4505894487457792",
+//   integrations: [
+//     // enable HTTP calls tracing
+//     new Sentry.Integrations.Http({ tracing: true }),
+//     // enable Express.js middleware tracing
+//     new Sentry.Integrations.Express({ app }),
+//   ],
+//   // Performance Monitoring
+//   tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+//   // Set sampling rate for profiling - this is relative to tracesSampleRate
+//   profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+// });
 
-// The request handler must be the first middleware on the app
-app.use(Sentry.Handlers.requestHandler());
+// // The request handler must be the first middleware on the app
+// app.use(Sentry.Handlers.requestHandler());
 
-// TracingHandler creates a trace for every incoming request
-app.use(Sentry.Handlers.tracingHandler());
-app.use(Sentry.Handlers.errorHandler());
+// // TracingHandler creates a trace for every incoming request
+// app.use(Sentry.Handlers.tracingHandler());
+// app.use(Sentry.Handlers.errorHandler());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
