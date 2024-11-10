@@ -15,7 +15,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(cors());
 // Log requests to the console.
 app.use(logger("dev"));
 
