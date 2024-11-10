@@ -7,16 +7,11 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 var cors = require("cors");
-const { ACCESS_TOKEN } = require("./server/utility/constants");
 
 // Set up the express app
 const app = express();
 
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-
 app.use(cors());
-app.options("*", cors());
 // Log requests to the console.
 app.use(logger("dev"));
 
