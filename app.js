@@ -6,7 +6,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 require("dotenv").config();
-var cors = require("cors");
+const cors = require("cors");
 const { ACCESS_TOKEN } = require("./server/utility/constants");
 
 // Set up the express app
@@ -15,65 +15,55 @@ const app = express();
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-app.use(cors());
+// Allow all origins without restrictions
+app.use(cors({ origin: "*", credentials: true }));
+
 // Log requests to the console.
 app.use(logger("dev"));
 
 Sentry.init({
   dsn: "https://62697854002c3b3789e0737992f31a9a@o1324264.ingest.sentry.io/4505894487457792",
   integrations: [
-    // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),
-    // enable Express.js middleware tracing
     new Sentry.Integrations.Express({ app }),
   ],
-  // Performance Monitoring
-  tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
-  // Set sampling rate for profiling - this is relative to tracesSampleRate
-  profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
 });
 
-// The request handler must be the first middleware on the app
+// Sentry request and error handlers
 app.use(Sentry.Handlers.requestHandler());
-
-// TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
 app.use(Sentry.Handlers.errorHandler());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const cookieExtractor = (res) => {
+const cookieExtractor = (req) => {
   let token = null;
   if (req && req.cookies) {
     console.log("access_token", req.cookies[ACCESS_TOKEN]);
     token = req.cookies[ACCESS_TOKEN];
-  } else return token;
+  }
+  return token;
 };
+
 const mongoString = process.env.DATABASE_URL;
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
+
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.DATABASE_URL);
-    console.log(`Mongo connected : ${conn.connection.host}`);
+    const conn = await mongoose.connect(mongoString);
+    console.log(`Mongo connected: ${conn.connection.host}`);
   } catch (err) {
-    console.log(err);
-    process.exit;
+    console.error(err);
+    process.exit(1);
   }
 };
-// mongoose.connect(mongoString);
-// const database = mongoose.connection;
-// database.on("error", (error) => {
-//   console.log(error);
-// });
 
-// database.once("connected", () => {
-//   console.log("Database Connected");
-// });
-// Require our routes into the application.
+// Import and use routes
 const refPath = "./server/routes/";
-
 require(`${refPath}affirmation`)(app);
 require(`${refPath}dailyVerse`)(app);
 require(`${refPath}testimony`)(app);
@@ -96,20 +86,19 @@ require(`${refPath}product`)(app);
 require(`${refPath}terms`)(app);
 require(`${refPath}dailyReading`)(app);
 
+// Custom error handler
 app.use((err, req, res, next) => res.json(err));
 
-//app.set("port", process.env.PORT || 8001);
+// Start server after connecting to DB
 connectDB().then(() => {
   app.listen(process.env.PORT || 8001, () => {
-    console.log(`Listening to port ${process.env.PORT || 8001}`);
+    console.log(`Listening on port ${process.env.PORT || 8001}`);
   });
 });
 
-// const server = app.listen(app.get("port"), function () {
-//   console.log("Server started on port " + app.get("port"));
-// });
-app.get("/debug-sentry", function mainHandler(req, res) {
-  throw new Error("My first Sentry error!");
+// Route for testing Sentry error reporting
+app.get("/debug-sentry", (req, res) => {
+  throw new Error("Test Sentry error!");
 });
 
 module.exports = app;
