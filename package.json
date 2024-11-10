@@ -13,6 +13,8 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.6",
     "@sentry/node": "^7.69.0",
+    "@sentry/profiling-node": "^8.37.1",
+    "@sentry/tracing": "^7.57.0",
     "aws-sdk": "^2.747.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
@@ -31,6 +33,6 @@
     "stripe": "^8.85.0"
   },
   "engines": {
-     "node": ">=16.0.0"
+    "node": ">=16.0.0"
   }
 }
