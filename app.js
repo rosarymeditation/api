@@ -12,9 +12,8 @@ const app = express();
 
 // Specify allowed origins for cross-domain requests
 const allowedOrigins = [
-  "https://softnergy.co.uk", // Replace with your actual frontend domain(s)
-  "https://rosaryadmin.vercel.app",
-  "*",
+  "https://softnergy.co.uk/", // Replace with your actual frontend domain(s)
+  "https://rosaryadmin.vercel.app/",
 ];
 
 // Configure CORS middleware
