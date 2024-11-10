@@ -14,6 +14,7 @@ const app = express();
 const allowedOrigins = [
   "https://softnergy.co.uk", // Replace with your actual frontend domain(s)
   "https://rosaryadmin.vercel.app",
+  "*",
 ];
 
 // Configure CORS middleware
