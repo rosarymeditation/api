@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
+  isDigital: { type: Boolean },
   price: { type: String },
   slug: { type: String },
   serial: { type: String },

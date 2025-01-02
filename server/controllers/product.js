@@ -26,10 +26,9 @@ module.exports = {
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
 
-      const { name, price, description } = req.body;
+      const { name, price, description, isDigital } = req.body;
 
       files.forEach((file) => {
-        console.log(file.location);
         const image = ProductImage({ url: file.location });
         image.save();
         imageIds.push(image._id);
@@ -38,6 +37,7 @@ module.exports = {
         name: name,
         serial: rand(1, 100000) + rand(1, 100000),
         price: price,
+        isDigital: isDigital,
         slug: formatSlug(name),
         description: description,
 
