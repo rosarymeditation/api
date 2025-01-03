@@ -8,6 +8,7 @@ module.exports = (app) => {
   app.post(rootUrl("delete-user"), auth, controller.deleteUser);
   app.post(rootUrl("forgot-password"), controller.sendForgotPasswordCode);
   app.post(rootUrl("change-password"), controller.changePassword);
+  app.post(rootUrl("countries"), controller.countries);
   app.post(rootUrl("verify-password"), controller.passwordVerification);
   app.post(rootUrl("find-Profile-Data"), controller.findProfileData);
   app.post(

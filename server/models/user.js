@@ -12,7 +12,15 @@ const userSchema = new mongoose.Schema({
     ref: "Role",
     required: true,
   },
-
+  address: {
+    street: { type: String },
+    addressLine2: { type: String }, // Optional second line for address (e.g., apartment, suite)
+    city: { type: String },
+    state: { type: String },
+    postalCode: { type: String },
+    country: { type: String },
+    purposes,
+  },
   bio: { type: String },
   verifyCode: { type: String },
   hasDeleted: { type: Boolean, default: false },
