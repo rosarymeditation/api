@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
     state: { type: String },
     postalCode: { type: String },
     country: { type: String },
-    purposes,
   },
   bio: { type: String },
   verifyCode: { type: String },
