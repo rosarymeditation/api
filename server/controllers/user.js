@@ -17,6 +17,7 @@ const bcrypt = require("bcryptjs");
 const { email1, email2 } = require("../utility/constants");
 const { CapitalizeFirstLetter } = require("../utility/global");
 const User = require("../models/user");
+const Country = require("../models/country");
 const Role = require("../models/role");
 
 module.exports = {
@@ -357,72 +358,46 @@ module.exports = {
       return res.status(OK).send({ error: true });
     }
   },
+
   countries: (req, res) => {
-    const countries = [
-      // Europe
-      { country: "Albania", countryCode: "AL" },
-      { country: "Andorra", countryCode: "AD" },
-      { country: "Armenia", countryCode: "AM" },
-      { country: "Austria", countryCode: "AT" },
-      { country: "Azerbaijan", countryCode: "AZ" },
-      { country: "Belarus", countryCode: "BY" },
-      { country: "Belgium", countryCode: "BE" },
-      { country: "Bosnia and Herzegovina", countryCode: "BA" },
-      { country: "Bulgaria", countryCode: "BG" },
-      { country: "Croatia", countryCode: "HR" },
-      { country: "Cyprus", countryCode: "CY" },
-      { country: "Czech Republic", countryCode: "CZ" },
-      { country: "Denmark", countryCode: "DK" },
-      { country: "Estonia", countryCode: "EE" },
-      { country: "Finland", countryCode: "FI" },
-      { country: "France", countryCode: "FR" },
-      { country: "Georgia", countryCode: "GE" },
-      { country: "Germany", countryCode: "DE" },
-      { country: "Greece", countryCode: "GR" },
-      { country: "Hungary", countryCode: "HU" },
-      { country: "Iceland", countryCode: "IS" },
-      { country: "Ireland", countryCode: "IE" },
-      { country: "Italy", countryCode: "IT" },
-      { country: "Kazakhstan", countryCode: "KZ" },
-      { country: "Kosovo", countryCode: "XK" },
-      { country: "Latvia", countryCode: "LV" },
-      { country: "Liechtenstein", countryCode: "LI" },
-      { country: "Lithuania", countryCode: "LT" },
-      { country: "Luxembourg", countryCode: "LU" },
-      { country: "Malta", countryCode: "MT" },
-      { country: "Moldova", countryCode: "MD" },
-      { country: "Monaco", countryCode: "MC" },
-      { country: "Montenegro", countryCode: "ME" },
-      { country: "Netherlands", countryCode: "NL" },
-      { country: "North Macedonia", countryCode: "MK" },
-      { country: "Norway", countryCode: "NO" },
-      { country: "Poland", countryCode: "PL" },
-      { country: "Portugal", countryCode: "PT" },
-      { country: "Romania", countryCode: "RO" },
-      { country: "Russia", countryCode: "RU" },
-      { country: "San Marino", countryCode: "SM" },
-      { country: "Serbia", countryCode: "RS" },
-      { country: "Slovakia", countryCode: "SK" },
-      { country: "Slovenia", countryCode: "SI" },
-      { country: "Spain", countryCode: "ES" },
-      { country: "Sweden", countryCode: "SE" },
-      { country: "Switzerland", countryCode: "CH" },
-      { country: "Turkey", countryCode: "TR" },
-      { country: "Ukraine", countryCode: "UA" },
-      { country: "United Kingdom", countryCode: "GB" },
-      { country: "Vatican City", countryCode: "VA" },
-
-      // North America
-      { country: "United States", countryCode: "US" },
-      { country: "Canada", countryCode: "CA" },
-      { country: "Mexico", countryCode: "MX" },
-
-      // New Zealand
-      { country: "New Zealand", countryCode: "NZ" },
-
-      // Australia
-      { country: "Australia", countryCode: "AU" },
-    ];
     return res.status(OK).send({ data: countries });
+  },
+
+  findAll: async (req, res) => {
+    try {
+      const data = await Country.find();
+
+      return res.status(OK).send({ data: data });
+    } catch (err) {
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
+  },
+
+  countrySearch: async (req, res) => {
+    try {
+      let hasData = false;
+      const { search = "" } = req.body;
+
+      const partialSearchCriteria = {
+        name: { $regex: new RegExp(search || "", "i") },
+      };
+      //const categoryIdSearchCriteria = { canShow: true };
+      if (search) {
+        hasData = true;
+      }
+
+      const data = hasData
+        ? await Country.find(partialSearchCriteria)
+        : // Skip documents based on the current page
+
+          await Country.find();
+
+      return res.status(OK).send({
+        data: data,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).send({ error: true, message: err });
+    }
   },
 };
