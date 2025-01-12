@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
   isDigital: { type: Boolean },
   price: { type: String },
+  url: { type: String },
   slug: { type: String },
   serial: { type: String },
   createdAt: { type: Date, default: Date.now },

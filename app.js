@@ -82,6 +82,8 @@ require(`${refPath}distress`)(app);
 require(`${refPath}product`)(app);
 require(`${refPath}terms`)(app);
 require(`${refPath}dailyReading`)(app);
+require(`${refPath}transaction`)(app);
+require(`${refPath}address`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 
