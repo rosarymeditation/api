@@ -8,13 +8,13 @@ const {
   Messages,
   NO_RESULT,
 } = require("../errors/statusCode");
-paypal.configure({
-  mode: "sandbox", // Use 'sandbox' for testing, 'live' for production
-  client_id:
-    "ARqd5dviGW50rQOUcR6Sg0X3r-86DwW5Rpf11pXgnmyFpGdtTrLO20_CbULdcy76J5GhhI-ydTBgu61U",
-  client_secret:
-    "EIdTJPIN14ipXvS6GXDocCXHcnBm4Hb9YGCcv4Vj0J39vfd59QxN_75Cy5r_yC288z3awF1wMSz5HjmL",
-});
+// paypal.configure({
+//   mode: "sandbox", // Use 'sandbox' for testing, 'live' for production
+//   client_id:
+//     "ARqd5dviGW50rQOUcR6Sg0X3r-86DwW5Rpf11pXgnmyFpGdtTrLO20_CbULdcy76J5GhhI-ydTBgu61U",
+//   client_secret:
+//     "EIdTJPIN14ipXvS6GXDocCXHcnBm4Hb9YGCcv4Vj0J39vfd59QxN_75Cy5r_yC288z3awF1wMSz5HjmL",
+// });
 const stripe = require("stripe")(process.env.STRIPE);
 // const query = new Query(PostCode);
 const currencies = [
