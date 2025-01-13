@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const suggestionSchema = new mongoose.Schema({
   title: { type: String, required: true },
+  email: { type: String },
   desc: { type: String, required: true },
   category: { type: String },
   createdAt: { type: Date, default: Date.now },
