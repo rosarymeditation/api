@@ -31,18 +31,17 @@ module.exports = {
 
   findAll: async (req, res) => {
     try {
-      const type = await Donor.findOne();
       const { page = 1, limit = 20 } = req.body;
 
       // console.log(findCode._id);
       const data = await Donor.find()
         .skip((page - 1) * limit)
         .limit(limit)
-        .sort();
+        .sort({ createdAt: "desc" });
       return res.status(OK).json({ data: data });
     } catch (err) {
       console.log(err);
-      return res.status(SERVER_ERROR).json({ error: true, message: err });
+      return res.status(SERVER_ERROR).json({ error: true });
     }
   },
 

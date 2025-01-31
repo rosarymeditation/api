@@ -14,10 +14,10 @@ const donorSchema = new mongoose.Schema({
   tier: {
     type: String,
     enum: [
-      "Grateful Heart",
-      "Faithful Supporter",
-      "Blessing Giver",
-      "Divine Patron",
+      "Platinum Patron",
+      "Gold Benefactor",
+      "Silver Champion",
+      "Bronze Supporter",
     ],
   },
   intentions: {
