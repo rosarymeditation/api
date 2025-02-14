@@ -26,11 +26,9 @@ module.exports = {
       const { content } = req.body;
       const findUser = await User.findById(userId);
       let feedStatus;
-      if (findUser.role == "65305951d24dd0acc26c71df") {
-        feedStatus = "6501e15612296a1e7f03a47e";
-      } else {
-        feedStatus = "6501e15012296a1e7f03a47c";
-      }
+
+      feedStatus = "6501e15612296a1e7f03a47e";
+
       //
       const data = Feed({
         author: userId,
