@@ -110,6 +110,16 @@ module.exports = {
       return res.status(OK).json({ error: true, message: err });
     }
   },
+  findById: async (req, res) => {
+    try {
+      const userId = req.body.id;
+
+      const data = await Feed.findById(userId);
+      return res.status(OK).json({ data: data });
+    } catch (err) {
+      return res.status(OK).json({ error: true, message: err });
+    }
+  },
 
   findAll: async (req, res) => {
     try {

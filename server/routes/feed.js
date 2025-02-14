@@ -6,6 +6,7 @@ module.exports = (app) => {
   app.post(rootUrl("likeFeed"), auth, controller.like);
   app.post(rootUrl("sendMessage"), controller.sendMessage);
   app.post(rootUrl("userFeeds"), auth, controller.findByUser);
+   app.post(rootUrl("userFeeds"), auth, controller.findById);
   app.post(rootUrl("allFeeds"), controller.findAll);
   app.delete(rootUrl("feed/:id"), auth, controller.delete);
   app.patch(
