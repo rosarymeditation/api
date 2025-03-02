@@ -146,7 +146,7 @@ module.exports = {
 
   findAll: async (req, res) => {
     try {
-      const { page = 1, limit = 10, code } = req.body;
+      const { page = 1, limit = 10, code = null } = req.body;
 
       var findCode = await Language.findOne({
         code: code || "0",
