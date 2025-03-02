@@ -85,6 +85,7 @@ require(`${refPath}dailyReading`)(app);
 require(`${refPath}transaction`)(app);
 require(`${refPath}address`)(app);
 require(`${refPath}donor`)(app);
+require(`${refPath}translate`)(app);
 
 app.use((err, req, res, next) => res.json(err));
 

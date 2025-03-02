@@ -9,6 +9,11 @@ const feedSchema = new mongoose.Schema({
     ref: "FeedStatus",
     required: true,
   },
+  language: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Language",
+    required: true,
+  },
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   createdAt: { type: Date, default: Date.now },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "FeedComment" }],
