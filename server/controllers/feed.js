@@ -9,7 +9,7 @@ const Language = require("../models/language");
 const FeedLike = require("../models/feedLikes");
 const User = require("../models/user");
 const { upload } = require("../utility/global");
-require("dotenv").config(); // Load environment variables
+require("dotenv").config();
 
 const axios = require("axios");
 const {
@@ -19,9 +19,8 @@ const {
   Messages,
 } = require("../errors/statusCode");
 
-async function translateText(text) {
-  const apiKey = "AIzaSyAw6l4HVAJBP58FJmAPFwSbtcyEZaUoWVQ";
-  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+async function translateText(text, api) {
+  const url = `https://translation.googleapis.com/language/translate/v2?key=${api}`;
   try {
     const response = await axios.post(url, {
       q: text,
@@ -45,6 +44,7 @@ async function translateText(text) {
 module.exports = {
   create: async (req, res) => {
     try {
+      const apiKey = process.env.API_KEY;
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
       const userId = req.userData.id;
@@ -53,9 +53,9 @@ module.exports = {
       let feedStatus;
 
       feedStatus = "6501e15612296a1e7f03a47e";
-      const spanish = await translateText(content);
 
-      //
+      const spanish = await translateText(content, apiKey);
+
       const data = Feed({
         author: userId,
         status: feedStatus,
@@ -72,16 +72,6 @@ module.exports = {
       });
       await data.save();
       await data2.save();
-      // const msg = {
-      //   to: "rosary@softnergy.com",
-      //   from: "rosary@softnergy.com",
-      //   templateId: "d-910819cd9df647e8a4b2c719d081c512",
-      //   dynamic_template_data: {
-      //     name: data.author.email,
-      //     id: data._id,
-      //     content: data.content,
-      //   },
-      // };
 
       // sgMail.send(msg, (error, result) => {
       //   if (error) {
@@ -157,7 +147,7 @@ module.exports = {
   findAll: async (req, res) => {
     try {
       const { page = 1, limit = 10, code } = req.body;
-     
+
       var findCode = await Language.findOne({
         code: code || "0",
       });
