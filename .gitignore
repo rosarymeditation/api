@@ -1,24 +1,52 @@
-# Ignore node_modules
+# Node.js dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Ignore environment variables file
+# Environment variables
 .env
-.package-lock.json
+.env.local
+.env.development
+.env.test
+.env.production
 
-# Ignore log files
+# Logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+.log
 
-# Ignore dependency directories
-npm-debug.log
-yarn-error.log
+# Binaries
+dist/
+build/
 
-# Ignore IDE files
+# TypeScript
+*.tsbuildinfo
+
+# IDE & Editor files
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Ignore build output
-/build/
-
-# Ignore OS-specific files
+# OS files
 .DS_Store
 Thumbs.db
+
+# Cache files
+.cache/
+.next/
+out/
+.nuxt/
+.svelte-kit/
+
+# Testing coverage reports
+coverage/
+
+# Misc
+*.bak
+*.orig
