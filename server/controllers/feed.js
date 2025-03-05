@@ -195,6 +195,7 @@ module.exports = {
   },
 
   update: async (req, res) => {
+    const apiKey = process.env.API_KEY;
     try {
       //console.log(req.params.id);
       const id = req.params.id;
@@ -205,10 +206,18 @@ module.exports = {
         content: content,
         url: photo || "",
       };
+      const spanish = await translateText(content, apiKey);
+      const updatedData2 = {
+        content: spanish,
+        url: photo || "",
+      };
+
       updatedData.hasUpdated = true;
+      updatedData2.hasUpdated = true;
       const options = { new: true };
 
       const result = await Feed.findByIdAndUpdate(id, updatedData, options);
+      const result2 = await Feed.findByIdAndUpdate(id, updatedData2, options);
 
       return res.status(OK).json({ error: false, result });
     } catch (err) {
