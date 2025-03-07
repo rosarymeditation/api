@@ -202,24 +202,27 @@ module.exports = {
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
       const { content } = req.body;
-      const updatedData = {
-        content: content,
-        language: "650294586a369b86e4f201f0",
-        url: photo || "",
-      };
-      const spanish = await translateText(content, apiKey);
-      const updatedData2 = {
-        content: spanish,
-        language: "6502946f6a369b86e4f201f2",
-        url: photo || "",
-      };
+      let updatedData = {};
+      const findById = await Feed.findById(id);
+      if (findById.language == "6502946f6a369b86e4f201f2") {
+        const spanish = await translateText(content, apiKey);
+        updatedData = {
+          content: spanish,
+
+          url: photo || "",
+        };
+      } else {
+        updatedData = {
+          content: spanish,
+          url: photo || "",
+        };
+      }
 
       updatedData.hasUpdated = true;
-      updatedData2.hasUpdated = true;
+
       const options = { new: true };
 
       const result = await Feed.findByIdAndUpdate(id, updatedData, options);
-      const result2 = await Feed.findByIdAndUpdate(id, updatedData2, options);
 
       return res.status(OK).json({ error: false, result });
     } catch (err) {
