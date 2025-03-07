@@ -184,6 +184,27 @@ module.exports = {
     }
   },
 
+  findAllAdmin: async (req, res) => {
+    try {
+      const { page = 1, limit = 10, code = null } = req.body;
+
+   
+      const data = await Feed.find()
+            .skip((page - 1) * limit) // Skip documents based on the current page
+            .limit(limit)
+            .sort({ createdAt: "desc" })
+            .populate("author")
+            .populate("status")
+            .populate("likes")
+            .populate("comments")
+        
+      return res.status(OK).json({ data: data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
+    }
+  },
+
   delete: async (req, res) => {
     try {
       const id = req.params.id;

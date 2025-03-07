@@ -8,6 +8,7 @@ module.exports = (app) => {
   app.post(rootUrl("userFeeds"), auth, controller.findByUser);
   app.post(rootUrl("feedById"), controller.findById);
   app.post(rootUrl("allFeeds"), controller.findAll);
+  app.post(rootUrl("allFeedsAdmin"), controller.findAllAdmin);
   app.delete(rootUrl("feed/:id"), auth, controller.delete);
   app.patch(
     rootUrl("feed/:id"),
