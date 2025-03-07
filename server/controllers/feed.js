@@ -204,11 +204,13 @@ module.exports = {
       const { content } = req.body;
       const updatedData = {
         content: content,
+        language: "650294586a369b86e4f201f0",
         url: photo || "",
       };
       const spanish = await translateText(content, apiKey);
       const updatedData2 = {
         content: spanish,
+        language: "6502946f6a369b86e4f201f2",
         url: photo || "",
       };
 
