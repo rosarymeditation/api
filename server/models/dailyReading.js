@@ -8,6 +8,8 @@ const dailyReadingSchema = new mongoose.Schema({
   },
   content: { type: String, required: true },
   summary: { type: String },
+  readingAudio: { type: String },
+  reflectionAudio: { type: String },
   date: { type: Date, required: true },
   language: {
     type: mongoose.Schema.Types.ObjectId,

@@ -5,6 +5,7 @@ const { auth, upload } = require("../utility/global");
 module.exports = (app) => {
   app.post(rootUrl("create-dailyReading"), controller.create);
   app.post(rootUrl("find-dailyReading"), controller.findOne);
+  app.post(rootUrl("checkIfExist"), controller.checkIfExist);
   // app.post(rootUrl("likeFeed"), auth, controller.like);
   // app.post(rootUrl("sendMessage"), controller.sendMessage);
   // app.post(rootUrl("userFeeds"), auth, controller.findByUser);
