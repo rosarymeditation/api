@@ -1,6 +1,7 @@
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
+const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const { FAILED_AUTH, OK } = require("../errors/statusCode");
 const { ACCESS_TOKEN } = require("../utility/constants");
@@ -214,6 +215,66 @@ const ORDER_STATUS = [
     name: "Canceled",
   },
 ];
+function getVerificationEmailOptions(obj) {
+  return {
+    from: '"Catholic Daily Reading" <noreply@catholicdailyreading.com>',
+    to: obj.email,
+    subject: "Verify Your Catholic Daily Reading Email",
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f4f4f4; border-radius: 8px; padding: 24px; border: 1px solid #e0e0e0;">
+        <p style="font-size: 15px; color: #333;">
+          You requested to log in to Catholic Daily Reading. To complete your login, please verify your email.
+        </p>
+        <p style="font-size: 15px; color: #333; margin-top: 20px;">
+          Your 4-digit verification code:
+        </p>
+        <div style="text-align: center; margin: 20px 0;">
+          <span style="
+            display: inline-block;
+            font-size: 26px;
+            font-weight: bold;
+            background-color: #003366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            letter-spacing: 4px;
+          ">
+            ${obj.code}
+          </span>
+        </div>
+        <p style="font-size: 15px; color: #333;">
+          Please enter this code in the app to complete your login. It will expire in <strong>24 hours</strong>.
+        </p>
+        <p style="font-size: 13px; color: #777; margin-top: 24px;">
+          If you did not request a login attempt for Catholic Daily Reading, simply ignore this message.
+        </p>
+        <hr style="margin: 28px 0; border: 0; border-top: 1px solid #eee;">
+        <p style="font-size: 13px; color: #999;">
+          Need assistance? Contact us at 
+          <a href="mailto:support@catholicdailyreading.com" style="color: #003366;">support@catholicdailyreading.com</a>.
+        </p>
+      </div>
+    `,
+  };
+}
+async function sendEmailCustom(mailOptions) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.hostinger.com", // Hostinger's SMTP server
+    port: 465, // SSL port for secure connection
+    secure: true, // Use TLS/SSL
+    auth: {
+      user: "noreply@catholicdailyreading.com",
+      pass: "2000years@BC",
+    },
+  });
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info.messageId);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+}
 module.exports = {
   upload: upload,
   uploadForCloudinary,
@@ -221,6 +282,8 @@ module.exports = {
   ORDER_STATUS,
   auth: authenticateUser,
   duration: duration,
+  getVerificationEmailOptions,
+  sendEmailCustom,
   days: daysOfWeek,
   randomSixDigits,
   months,

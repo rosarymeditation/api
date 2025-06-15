@@ -15,10 +15,16 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET;
 const bcrypt = require("bcryptjs");
 const { email1, email2 } = require("../utility/constants");
-const { CapitalizeFirstLetter } = require("../utility/global");
+const {
+  CapitalizeFirstLetter,
+  sendEmailCustom,
+  getVerificationEmailOptions,
+} = require("../utility/global");
 const User = require("../models/user");
+const Subscriber = require("../models/subscriber");
 const Country = require("../models/country");
 const Role = require("../models/role");
+const { generateAccessToken } = require("../utility/tokens");
 
 module.exports = {
   signUp: async (req, res) => {
@@ -118,6 +124,211 @@ module.exports = {
     }
   },
 
+  loginWithOtp: async (req, res) => {
+    try {
+      const { email } = req.body;
+      console.log(email);
+
+      // Find an existing user (not deleted) or create a new one
+      let user = await Subscriber.findOne({
+        email: email,
+      });
+
+      // Generate verification code
+      //const code = generateAccessToken();
+
+      const code = generateAccessToken();
+
+      // user.emailVerificationCode = code;
+      //(user.email = email), await user.save();
+
+      // Send verification email
+      const mailOptions = getVerificationEmailOptions({
+        code,
+        email,
+      });
+      await sendEmailCustom(mailOptions);
+
+      if (user) {
+        // Update the existing user
+        user.emailVerificationCode = code;
+
+        await user.save();
+      } else {
+        // Create a new user if not found
+        user = new Subscriber({
+          emailVerificationCode: code,
+
+          email: email,
+        });
+        await user.save();
+      }
+
+      return res.status(OK).send({
+        error: false,
+      });
+    } catch (err) {
+      console.error("Registration error:", err);
+      return res.status(SERVER_ERROR).send({
+        error: true,
+        message: "Internal server error during registration",
+      });
+    }
+  },
+
+  resendEmailOtp: async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      if (!email) {
+        return res
+          .status(400)
+          .send({ error: true, message: "Phone number is required." });
+      }
+
+      // Find user by phone number
+      const user = await Subscriber.findOne({ email: email });
+
+      if (!user) {
+        return res.status(404).send({
+          error: true,
+          message: "User with this phone number does not exist.",
+        });
+      }
+
+      // Generate new OTP
+      const code = generateAccessToken(); // Replace with 6-digit OTP logic if needed
+
+      // Update user with new OTP and optional OS info
+      user.emailVerificationCode = code;
+
+      await user.save();
+
+      // Send SMS
+      const mailOptions = getVerificationEmailOptions({
+        code,
+        email,
+      });
+      await sendEmailCustom(mailOptions);
+
+      return res.status(200).send({
+        error: false,
+        message: "OTP resent successfully.",
+      });
+    } catch (err) {
+      console.error("Error resending OTP:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Internal server error while resending OTP.",
+      });
+    }
+  },
+
+  saveSubscriberEmail: async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
+    if (!email) {
+      return res
+        .status(400)
+        .send({ error: true, message: "User ID and code are required." });
+    }
+
+    try {
+      const dataObj = new Subscriber({
+        email: email,
+      });
+
+      const data = await dataObj.save();
+
+      return res.status(200).send({
+        success: true,
+      });
+    } catch (err) {
+      console.error("OTP verification error:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Server error during OTP verification.",
+      });
+    }
+  },
+  verifyEmailOtp: async (req, res) => {
+    const { code, email } = req.body;
+    console.log(req.body);
+    console.log(email);
+    if (!email || !code) {
+      return res
+        .status(400)
+        .send({ error: true, message: "User ID and code are required." });
+    }
+
+    try {
+      const user = await Subscriber.findOne({
+        email: email,
+      });
+
+      if (!user) {
+        return res
+          .status(404)
+          .send({ error: true, message: "User not found." });
+      }
+
+      if (user.emailVerificationCode !== code) {
+        return res
+          .status(401)
+          .send({ error: true, message: "Invalid verification code." });
+      }
+
+      // Optional: Mark user as verified
+
+      user.emailVerificationCode = null; // Invalidate the OTP after successful use
+      await user.save();
+
+      return res.status(200).send({
+        isvalid: user.isValid,
+        success: true,
+      });
+    } catch (err) {
+      console.error("OTP verification error:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Server error during OTP verification.",
+      });
+    }
+  },
+  checkSubscriptionState: async (req, res) => {
+    const { email } = req.body;
+
+    console.log(email);
+    console.log("----------------ii4i4i4o4o--------")
+    if (!email) {
+      return res
+        .status(400)
+        .send({ error: true, message: "User ID and code are required." });
+    }
+
+    try {
+      const user = await Subscriber.findOne({
+        email: email,
+      });
+
+      if (!user) {
+        return res.status(200).send({ error: true, isvalid: false });
+      }
+
+      // Optional: Mark user as verified
+
+      return res.status(200).send({
+        isvalid: user.isValid,
+        success: true,
+      });
+    } catch (err) {
+      console.error("OTP verification error:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Server error during OTP verification.",
+      });
+    }
+  },
   updateProfile: async (req, res) => {
     try {
       const id = req.userData.id;
