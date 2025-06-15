@@ -10,6 +10,7 @@ module.exports = (app) => {
   app.post(rootUrl("change-password"), controller.changePassword);
   app.post(rootUrl("countries"), controller.countrySearch);
   app.post(rootUrl("loginWithOtp"), controller.loginWithOtp);
+  
   app.post(rootUrl("resendEmailOtp"), controller.resendEmailOtp);
   app.post(rootUrl("saveSubscriberEmail"), controller.saveSubscriberEmail);
   app.post(rootUrl("verifyEmailOtp"), controller.verifyEmailOtp);
