@@ -548,7 +548,7 @@ module.exports = {
       var findCode = await Language.findOne({
         code: code.toString(),
       });
-      console.log(req.body);
+      console.log(targetDate);
       const data = await DailyReading.findOne({
         language: findCode._id,
         date: targetDate,
@@ -556,6 +556,7 @@ module.exports = {
       // .skip((page - 1) * limit) // Skip documents based on the current page
       // .limit(limit);
       //.sort({ verseNum: 1 });
+      console.log(data)
       return res.status(OK).json(data);
     } catch (err) {
       console.log(err);
