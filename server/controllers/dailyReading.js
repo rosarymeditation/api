@@ -10,7 +10,6 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const ffmpeg = require("fluent-ffmpeg");
 
-
 const ffmpegInstaller = require("@ffmpeg-installer/ffmpeg");
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
@@ -53,24 +52,24 @@ The required HTML format is:
     <h3>[Reading Cycle Info]</h3>
     <h3>Lectionary: [Lectionary Number]</h3>
 
-    <h4>Reading I</h4>
+    <h4>Reading One</h4>
     <p><strong>[Reading I Reference]</strong></p>
-    <p>[Reading I Text - one verse per <p>]</p>
+    <p>[Reading 1 Text - one verse per <p>]</p>
 
     <h4>Responsorial Psalm</h4>
     <p><strong>[Psalm Reference]</strong></p>
-    <p><strong>R.</strong> [Psalm Response]</p>
+    <p><strong>Response</strong> [Psalm Response]</p>
     <p>[Psalm Verse 1]</p>
     <p>[Psalm Verse 2]</p>
     ...
 
-    <h4>Reading II</h4>
+    <h4>Reading Two</h4>
     <p><strong>[Reading II Reference]</strong></p>
     <p>[Reading II Text]</p>
 
     <h4>Verse Before the Gospel</h4>
     <p><strong>[Verse Reference]</strong></p>
-    <p><strong>R.</strong> [Verse Text]</p>
+    <p><strong>Response</strong> [Verse Text]</p>
 
     <h4>Gospel</h4>
     <p><strong>[Gospel Reference]</strong></p>
@@ -94,24 +93,24 @@ El formato HTML requerido es:
     <h3>[Información del ciclo de lectura]</h3>
     <h3>Leccionario: [Número del leccionario]</h3>
 
-    <h4>Primera lectura</h4>
+    <h4>Primera Lectura</h4>
     <p><strong>[Referencia de la primera lectura]</strong></p>
     <p>[Texto de la primera lectura - un versículo por etiqueta <p>]</p>
 
     <h4>Salmo Responsorial</h4>
     <p><strong>[Referencia del salmo]</strong></p>
-    <p><strong>R.</strong> [Respuesta del salmo]</p>
+    <p><strong>Respuesta</strong> [Respuesta del salmo]</p>
     <p>[Versículo 1 del salmo]</p>
     <p>[Versículo 2 del salmo]</p>
     ...
 
-    <h4>Segunda lectura</h4>
+    <h4>Segunda Lectura</h4>
     <p><strong>[Referencia de la segunda lectura]</strong></p>
     <p>[Texto de la segunda lectura]</p>
 
     <h4>Aclamación antes del Evangelio</h4>
     <p><strong>[Referencia de la aclamación]</strong></p>
-    <p><strong>R.</strong> [Texto de la aclamación]</p>
+    <p><strong>Respuesta</strong> [Texto de la aclamación]</p>
 
     <h4>Evangelio</h4>
     <p><strong>[Referencia del Evangelio]</strong></p>
@@ -249,99 +248,130 @@ function cleanLiturgicalText(text) {
     .join(" ");
 }
 function splitText(text, maxChars = 4000) {
-  const paras = text.split(/\r?\n\s*\r?\n/);
+  const paras = text.split(/\r?\n\s*\r?\n/); // Split by paragraphs
   const chunks = [];
   let buf = "";
   for (const p of paras) {
-    const candidate = buf ? buf + "\n\n" + p : p;
+    const candidate = buf ? buf + "\n\n" + p : p; // Try to add paragraph to buffer
     if (candidate.length > maxChars) {
+      // If the candidate exceeds the limit, push the current buffer and reset
       if (buf) {
         chunks.push(buf);
-        buf = p;
+        buf = p; // Start new chunk with current paragraph
       } else {
-        // single paragraph too big → slice it
+        // Single paragraph too big → slice it into chunks
         for (let i = 0; i < p.length; i += maxChars) {
           chunks.push(p.slice(i, i + maxChars));
         }
         buf = "";
       }
     } else {
-      buf = candidate;
+      buf = candidate; // Add the paragraph to the buffer
     }
   }
+
+  // Add the remaining buffer as a final chunk
   if (buf) chunks.push(buf);
   return chunks;
 }
+// function splitText(text, maxChars = 4000) {
+//   const paras = text.split(/\r?\n\s*\r?\n/);
+//   const chunks = [];
+//   let buf = "";
+//   for (const p of paras) {
+//     const candidate = buf ? buf + "\n\n" + p : p;
+//     if (candidate.length > maxChars) {
+//       if (buf) {
+//         chunks.push(buf);
+//         buf = p;
+//       } else {
+//         // single paragraph too big → slice it
+//         for (let i = 0; i < p.length; i += maxChars) {
+//           chunks.push(p.slice(i, i + maxChars));
+//         }
+//         buf = "";
+//       }
+//     } else {
+//       buf = candidate;
+//     }
+//   }
+//   if (buf) chunks.push(buf);
+//   return chunks;
+// }
 async function generateSpeechAAC(
   text,
-  voice = "nova",
+  voice = "nova", // Specify voice here (e.g., "nova" or others)
   fileName = "output.aac"
 ) {
-  const cleanText = cleanLiturgicalText(text);
-  const chunks = splitText(cleanText, 4000);
+  const cleanText = cleanLiturgicalText(text); // Clean text from any HTML tags or unwanted characters
+  const chunks = splitText(cleanText, 4000); // Split the text into manageable chunks
   const tempMp3Files = [];
 
   try {
-    // 1) Generate one MP3 per chunk
+    // Step 1: Generate one MP3 per chunk
     for (let i = 0; i < chunks.length; i++) {
       const chunk = chunks[i];
       const resp = await axios({
         method: "post",
-        url: "https://api.openai.com/v1/audio/speech",
+        url: "https://api.openai.com/v1/audio/speech", // Using OpenAI's TTS API (adjust if using a different service)
         headers: {
-          Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`,
+          Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`, // Ensure to pass the API key here
           "Content-Type": "application/json",
         },
-        responseType: "arraybuffer",
+        responseType: "arraybuffer", // Get audio as a binary response
         data: {
-          model: "tts-1",
-          input: chunk,
-          voice,
+          model: "tts-1", // Ensure this is the correct model for text-to-speech
+          input: chunk, // The chunk of text to process
+          voice: voice, // Voice option for TTS
         },
       });
 
-      const mp3Path = path.join(os.tmpdir(), `tts_${uuidv4()}_${i}.mp3`);
-      fs.writeFileSync(mp3Path, resp.data);
-      tempMp3Files.push(mp3Path);
+      const mp3Path = path.join(os.tmpdir(), `tts_${uuidv4()}_${i}.mp3`); // Store MP3 temporarily
+      fs.writeFileSync(mp3Path, resp.data); // Save the MP3 file
+      tempMp3Files.push(mp3Path); // Keep track of the temporary MP3 files
     }
 
-    // 2) Merge all MP3s into one AAC
+    // Step 2: Merge all MP3 files into one AAC file
     const mergedAac = path.join(os.tmpdir(), `merged_${uuidv4()}.aac`);
 
     await new Promise((resolve, reject) => {
       const cmd = ffmpeg();
-      // add every mp3 as an input
+      // Add each MP3 file as an input to ffmpeg
       tempMp3Files.forEach((mp3) => cmd.input(mp3));
+
       cmd
         .audioCodec("aac")
         .format("adts")
-        .on("end", resolve)
-        .on("error", reject)
-        .save(mergedAac);
+        .on("end", resolve) // Resolve the promise when merging is done
+        .on("error", reject) // Reject the promise if there's an error
+        .save(mergedAac); // Save the final merged file
     });
 
-    // 3) Upload merged AAC to S3
+    // Step 3: Upload the merged AAC file to S3
     const fileContent = fs.readFileSync(mergedAac);
     const s3Params = {
-      Bucket: "rosaryapp",
-      ACL: "public-read",
-      Key: `audio/${fileName}`,
-      Body: fileContent,
-      ContentType: "audio/aac",
+      Bucket: "rosaryapp", // Your S3 bucket name
+      ACL: "public-read", // Set the proper access control
+      Key: `audio/${fileName}`, // File path in the bucket
+      Body: fileContent, // The file content
+      ContentType: "audio/aac", // Set the correct MIME type for AAC
     };
-    const s3Response = await s3.upload(s3Params).promise();
 
-    // 4) Cleanup
-    for (const mp3 of tempMp3Files) fs.unlinkSync(mp3);
-    fs.unlinkSync(mergedAac);
+    const s3Response = await s3.upload(s3Params).promise(); // Upload to S3
 
-    console.log("✅ Uploaded to S3:", s3Response.Location);
-    return s3Response.Location;
+    // Step 4: Cleanup temporary files
+    for (const mp3 of tempMp3Files) {
+      fs.existsSync(mp3) && fs.unlinkSync(mp3); // Delete MP3 files
+    }
+    fs.unlinkSync(mergedAac); // Delete the merged AAC file
+
+    console.log("✅ Uploaded to S3:", s3Response.Location); // Log the S3 URL of the uploaded file
+    return s3Response.Location; // Return the S3 URL
   } catch (err) {
-    // clean up if something went wrong
+    // Cleanup in case of an error
     tempMp3Files.forEach((f) => fs.existsSync(f) && fs.unlinkSync(f));
     console.error("❌ Error:", err.response?.data || err.message);
-    throw err;
+    throw err; // Throw the error after cleanup
   }
 }
 function formatDate(date) {
@@ -391,9 +421,27 @@ module.exports = {
   create: async (req, res) => {
     try {
       const { contentEnglish, contentSpanish, date } = req.body;
+      console.log(req.files);
+      console.log(req.body);
       const targetDate = new Date(date);
       const type = getLiturgicalPeriod(targetDate);
+      const readingFileEN = req.files.readingFileEN;
+      const readingFileES = req.files.readingFileES;
 
+      // Here you will use the uploaded audio files directly
+      const readingAudioFileEN = readingFileEN
+        ? readingFileEN[0].location
+        : null;
+      const readingAudioFileES = readingFileES
+        ? readingFileES[0].location
+        : null;
+      if (readingAudioFileEN == null || readingAudioFileES == null) {
+        return res
+          .status(SERVER_ERROR)
+          .json({ error: false, message: "Saved or updated successfully." });
+      }
+      console.log(readingAudioFileES);
+      console.log(readingAudioFileEN);
       // Format content and English reflection in parallel
       const [formattedEN, reflectionEN] = await Promise.all([
         openai.chat.completions.create({
@@ -470,30 +518,24 @@ module.exports = {
       ]);
       const now = new Date(); // Create timestamp once to ensure consistency
 
-      const [
-        readingAudio_EN_Url,
-        readingAudio_ES_Url,
-        reflectionAudio_EN_Url,
-        reflectionAudio_ES_Url,
-      ] = await Promise.all([
-        generateSpeechAAC(contentEnglish, "shimmer", `reading_en_${now}`),
-        generateSpeechAAC(contentSpanish, "shimmer", `reading_es_${now}`),
-        generateSpeechAAC(
-          formattedHtmlEN_Reflection,
-          "fable",
-          `reflection_en_${now}`
-        ),
-        generateSpeechAAC(
-          formattedHtmlES_Reflection,
-          "fable",
-          `reflection_es_${now}`
-        ),
-      ]);
+      const [reflectionAudio_EN_Url, reflectionAudio_ES_Url] =
+        await Promise.all([
+          generateSpeechAAC(
+            formattedHtmlEN_Reflection,
+            "fable",
+            `reflection_en_${now}`
+          ),
+          generateSpeechAAC(
+            formattedHtmlES_Reflection,
+            "fable",
+            `reflection_es_${now}`
+          ),
+        ]);
       // Upsert English record
       if (existingEN) {
         existingEN.content = formattedHtmlEN;
         existingEN.summary = formattedHtmlEN_Reflection;
-        existingEN.readingAudio = readingAudio_EN_Url;
+        existingEN.readingAudio = readingAudioFileEN;
         existingEN.reflectionAudio = reflectionAudio_EN_Url;
         await existingEN.save();
       } else {
@@ -503,7 +545,7 @@ module.exports = {
           content: formattedHtmlEN,
           summary: formattedHtmlEN_Reflection,
           date: targetDate,
-          readingAudio: readingAudio_EN_Url,
+          readingAudio: readingAudioFileEN,
           reflectionAudio: reflectionAudio_EN_Url,
         });
       }
@@ -512,7 +554,7 @@ module.exports = {
       if (existingES) {
         existingES.content = formattedHtmlES;
         existingES.summary = formattedHtmlES_Reflection;
-        existingES.readingAudio = readingAudio_ES_Url;
+        existingES.readingAudio = readingAudioFileES;
         existingES.reflectionAudio = reflectionAudio_ES_Url;
         await existingES.save();
       } else {
@@ -522,9 +564,151 @@ module.exports = {
           content: formattedHtmlES,
           summary: formattedHtmlES_Reflection,
           date: targetDate,
-          readingAudio: readingAudio_ES_Url,
+          readingAudio: readingAudioFileES,
           reflectionAudio: reflectionAudio_ES_Url,
         });
+      }
+
+      return res
+        .status(OK)
+        .json({ error: false, message: "Saved or updated successfully." });
+    } catch (err) {
+      // const str = err.response.data.toString("utf8"); // ①
+      // const json = JSON.parse(str); // ②
+      // console.error("OpenAI error:", json.error.message);
+      return res
+        .status(SERVER_ERROR)
+        .json({ error: true, message: "Internal Server Error" });
+    }
+  },
+
+  updateCreate: async (req, res) => {
+    try {
+      const { contentEnglish, contentSpanish, date } = req.body;
+      console.log(req.files);
+      console.log(req.body);
+      const targetDate = new Date(date);
+      const type = getLiturgicalPeriod(targetDate);
+      const readingFileEN = req.files.readingFileEN;
+      const readingFileES = req.files.readingFileES;
+
+      // Here you will use the uploaded audio files directly
+      const readingAudioFileEN = readingFileEN
+        ? readingFileEN[0].location
+        : null;
+      const readingAudioFileES = readingFileES
+        ? readingFileES[0].location
+        : null;
+      if (readingAudioFileEN == null || readingAudioFileES == null) {
+        return res
+          .status(SERVER_ERROR)
+          .json({ error: false, message: "Saved or updated successfully." });
+      }
+      console.log(readingAudioFileES);
+      console.log(readingAudioFileEN);
+      // Format content and English reflection in parallel
+      // const [formattedEN, reflectionEN] = await Promise.all([
+      //   openai.chat.completions.create({
+      //     model: "gpt-4",
+      //     temperature: 0.2,
+      //     messages: [
+      //       { role: "system", content: systemPromptEnglish },
+      //       { role: "user", content: contentEnglish },
+      //     ],
+      //   }),
+      //   openai.chat.completions.create({
+      //     model: "gpt-4",
+      //     temperature: 0.2,
+      //     messages: [
+      //       { role: "system", content: reflectionPromptEN },
+      //       { role: "user", content: contentEnglish },
+      //     ],
+      //   }),
+      // ]);
+
+      // const formattedHtmlEN = formattedEN.choices[0].message.content;
+      // const formattedHtmlEN_Reflection =
+      //   reflectionEN.choices[0].message.content;
+
+      // // Translate English reflection to Spanish
+      // const translationPrompt = (lang) => `
+      //   You are a translation assistant. Translate the following text into ${lang}.
+      //   - Keep the meaning and tone.
+      //   - Preserve structure and paragraphs.
+      //   - Do not summarize or omit anything.
+
+      //   Text:
+      // `;
+
+      // const translationResponse = await openai.chat.completions.create({
+      //   model: "gpt-4",
+      //   temperature: 0.2,
+      //   messages: [
+      //     { role: "system", content: "You are a helpful translator." },
+      //     {
+      //       role: "user",
+      //       content: translationPrompt("Spanish") + formattedHtmlEN_Reflection,
+      //     },
+      //   ],
+      // });
+
+      // const formattedHtmlES_Reflection =
+      //   translationResponse.choices[0].message.content;
+
+      // // Format provided Spanish content
+      // const formattedES = await openai.chat.completions.create({
+      //   model: "gpt-4",
+      //   temperature: 0.2,
+      //   messages: [
+      //     { role: "system", content: systemPromptSpanish },
+      //     { role: "user", content: contentSpanish },
+      //   ],
+      // });
+
+      // const formattedHtmlES = formattedES.choices[0].message.content;
+
+      // // Find existing records
+      const [existingEN, existingES] = await Promise.all([
+        DailyReading.findOne({
+          language: languageIds.english,
+          type,
+          date: targetDate,
+        }),
+        DailyReading.findOne({
+          language: languageIds.spanish,
+          type,
+          date: targetDate,
+        }),
+      ]);
+      // const now = new Date(); // Create timestamp once to ensure consistency
+
+      // const [reflectionAudio_EN_Url, reflectionAudio_ES_Url] =
+      //   await Promise.all([
+      //     generateSpeechAAC(
+      //       formattedHtmlEN_Reflection,
+      //       "fable",
+      //       `reflection_en_${now}`
+      //     ),
+      //     generateSpeechAAC(
+      //       formattedHtmlES_Reflection,
+      //       "fable",
+      //       `reflection_es_${now}`
+      //     ),
+      //   ]);
+      // Upsert English record
+      if (existingEN) {
+        existingEN.readingAudio = readingAudioFileEN;
+
+        await existingEN.save();
+      } else {
+      }
+
+      // Upsert Spanish record
+      if (existingES) {
+        existingES.readingAudio = readingAudioFileES;
+
+        await existingES.save();
+      } else {
       }
 
       return res
@@ -556,7 +740,7 @@ module.exports = {
       // .skip((page - 1) * limit) // Skip documents based on the current page
       // .limit(limit);
       //.sort({ verseNum: 1 });
-      console.log(data)
+      console.log(data);
       return res.status(OK).json(data);
     } catch (err) {
       console.log(err);

@@ -3,7 +3,24 @@ const { rootUrl } = require("../utility/constants");
 const { auth, upload } = require("../utility/global");
 
 module.exports = (app) => {
-  app.post(rootUrl("create-dailyReading"), controller.create);
+  app.post(
+    rootUrl("create-dailyReading"),
+    upload.fields([
+      { name: "readingFileEN", maxCount: 1 },
+      { name: "readingFileES", maxCount: 1 },
+     
+    ]),
+    controller.create
+  );
+  app.post(
+    rootUrl("update-create-reading"),
+    upload.fields([
+      { name: "readingFileEN", maxCount: 1 },
+      { name: "readingFileES", maxCount: 1 },
+    ]),
+    controller.updateCreate
+  );
+ // app.post(rootUrl("getReflection"), controller.getReflection);
   app.post(rootUrl("find-dailyReading"), controller.findOne);
   app.post(rootUrl("checkIfExist"), controller.checkIfExist);
   // app.post(rootUrl("likeFeed"), auth, controller.like);
