@@ -12,6 +12,7 @@ const {
 } = require("../errors/statusCode");
 // const query = new Query(PostCode);
 
+
 module.exports = {
   create: async (req, res) => {
     try {
@@ -20,7 +21,6 @@ module.exports = {
         name: name,
       });
       await data.save();
-
       return res.status(OK).json({ error: false });
     } catch (err) {
       return res.status(OK).json({ error: true });

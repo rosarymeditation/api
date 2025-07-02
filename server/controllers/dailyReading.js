@@ -48,8 +48,8 @@ Only format — do not interpret or edit.
 The required HTML format is:
 
 <div>
-    <h2>[Day Title]</h2>
-    <h3>[Reading Cycle Info]</h3>
+    <h1>[Day Title]</h1>
+    <h2>[Reading Cycle Info]</h2>
     <h3>Lectionary: [Lectionary Number]</h3>
 
     <h4>Reading One</h4>
@@ -89,8 +89,8 @@ Solo debes dar formato — no interpretes ni edites.
 El formato HTML requerido es:
 
 <div>
-    <h2>[Título del día]</h2>
-    <h3>[Información del ciclo de lectura]</h3>
+    <h1>[Título del día]</h1>
+    <h2>[Información del ciclo de lectura]</h2>
     <h3>Leccionario: [Número del leccionario]</h3>
 
     <h4>Primera Lectura</h4>
