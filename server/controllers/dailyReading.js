@@ -727,7 +727,7 @@ module.exports = {
   findOne: async (req, res) => {
     try {
       let { code, date } = req.body;
-      limit = 30;
+     
       const targetDate = new Date(date);
       var findCode = await Language.findOne({
         code: code.toString(),
