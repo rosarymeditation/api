@@ -27,11 +27,12 @@ module.exports = {
         dailyItems,
         code = 0
       } = req.body;
+      console.log(req.body)
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
       // Basic validation
       var findCode = await Language.findOne({
-        code: code || "0",
+        code: code
       });
       if (
         !slug ||
@@ -81,26 +82,38 @@ module.exports = {
   },
   findAll: async (req, res) => {
     try {
-      let { code, date } = req.body;
+      let { code, date, limit = 10, page = 1 } = req.body;
 
-      // const targetDate = new Date(date);
-      // var findCode = await Language.findOne({
-      //   code: code.toString(),
-      // });
 
-      // const data = await DailyReading.findOne({
-      //   language: findCode._id,
-      //   date: targetDate,
-      // });
+      console.log(req.body)
       var findCode = await Language.findOne({
         code: code.toString(),
       });
-      const data = await Plan.find({language:findCode._id});
+      const data = await Plan.find({ language: findCode._id }).skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit);
 
 
       // .skip((page - 1) * limit) // Skip documents based on the current page
       // .limit(limit);
       //.sort({ verseNum: 1 });
+      return res.status(OK).json(data);
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
+    }
+  },
+  findAllPage: async (req, res) => {
+    try {
+      let { code, date, limit = 10, page = 1 } = req.body;
+      console.log(req.body)
+      var findCode = await Language.findOne({
+        code: code.toString(),
+      });
+      const data = await Plan.find({ language: findCode._id }).skip((page - 1) * limit) // Skip documents based on the current page
+        .limit(limit);
+      const data2 = await Plan.find({ language: findCode._id })
+
+      console.log(data2.length)
       return res.status(OK).json(data);
     } catch (err) {
       console.log(err);
