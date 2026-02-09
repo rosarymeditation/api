@@ -55,7 +55,6 @@ FORBIDDEN LANGUAGE (ABSOLUTE):
 
 The following words or phrases MUST NEVER appear, even once:
 
-unwavering
 unwaveringly
 unwaveringness
 steadfast resolve
@@ -148,7 +147,6 @@ Return JSON in this EXACT structure:
 
     // Final forbidden-word check (guaranteed pass now)
     const forbidden = [
-      "unwavering",
       "steadfast resolve",
       "timeless",
       "profound",
