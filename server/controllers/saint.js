@@ -149,7 +149,6 @@ Return JSON in this EXACT structure:
     const forbidden = [
       "steadfast resolve",
       "timeless",
-      "profound",
       "deeply moving",
       "rich tapestry",
       "bears witness",
