@@ -257,6 +257,100 @@ function getVerificationEmailOptions(obj) {
     `,
   };
 }
+function getRosaryFeedbackAdminEmailOptions(data) {
+  return {
+    from: '"Rosary Meditation Guide" <noreply@catholicdailyreading.com>',
+    to: "mr.nnamdinwosu@gmail.com",
+    subject: `[Rosary Feedback] ${data.title || "New Message"} — from ${data.email}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f7faff; border-radius: 8px; padding: 24px; border: 1px solid #d6e2f0;">
+
+        <div style="text-align: center; margin-bottom: 20px;">
+          <img src="https://rosaryapp.s3.eu-west-2.amazonaws.com/logo_2.png" alt="Rosary Meditation Guide" style="width: 120px;" />
+        </div>
+
+        <h2 style="color: #0052CC; margin-bottom: 16px; text-align: center;">
+          📿 New Feedback — Rosary Meditation Guide
+        </h2>
+
+        <div style="background-color: #eef4ff; border-left: 4px solid #0052CC; border-radius: 4px; padding: 16px 20px; margin: 0 0 20px 0;">
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Email:</strong>
+            <a href="mailto:${data.email}" style="color: #0c3c78;">${data.email}</a>
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Category:</strong> ${data.category || "Not provided"}
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Title:</strong> ${data.title || "No title provided"}
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 6px 0;">
+            <strong>Message:</strong>
+          </p>
+          <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.7; white-space: pre-wrap;">
+            ${data.desc}
+          </p>
+        </div>
+
+        <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e0e0e0;">
+
+        <p style="font-size: 13px; color: #999; text-align: center;">
+          Reply directly to
+          <a href="mailto:${data.email}" style="color: #0c3c78;">${data.email}</a>
+        </p>
+
+      </div>
+    `,
+  };
+}
+
+function getDailyReadingsFeedbackAdminEmailOptions(data) {
+  return {
+    from: '"Catholic Daily Readings" <noreply@catholicdailyreading.com>',
+    to: "mr.nnamdinwosu@gmail.com",
+    subject: `[Daily Readings Feedback] ${data.subject || "New Message"} — from ${data.name || data.sender}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #f7faff; border-radius: 8px; padding: 24px; border: 1px solid #d6e2f0;">
+
+        <div style="text-align: center; margin-bottom: 20px;">
+          <img src="https://rosaryapp.s3.eu-west-2.amazonaws.com/logo_2.png" alt="Catholic Daily Readings" style="width: 120px;" />
+        </div>
+
+        <h2 style="color: #003366; margin-bottom: 16px; text-align: center;">
+          📖 New Feedback — Catholic Daily Readings
+        </h2>
+
+        <div style="background-color: #eef4ff; border-left: 4px solid #003366; border-radius: 4px; padding: 16px 20px; margin: 0 0 20px 0;">
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Name:</strong> ${data.name || "Not provided"}
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Email:</strong>
+            <a href="mailto:${data.sender}" style="color: #003366;">${data.sender}</a>
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 10px 0;">
+            <strong>Subject:</strong> ${data.subject || "No subject provided"}
+          </p>
+          <p style="font-size: 14px; color: #333; margin: 0 0 6px 0;">
+            <strong>Message:</strong>
+          </p>
+          <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.7; white-space: pre-wrap;">
+            ${data.message}
+          </p>
+        </div>
+
+        <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e0e0e0;">
+
+        <p style="font-size: 13px; color: #999; text-align: center;">
+          Reply directly to
+          <a href="mailto:${data.sender}" style="color: #003366;">${data.sender}</a>
+        </p>
+
+      </div>
+    `,
+  };
+}
+
 async function sendEmailCustom(mailOptions) {
   const transporter = nodemailer.createTransport({
     host: "smtp.hostinger.com", // Hostinger's SMTP server
@@ -294,4 +388,6 @@ module.exports = {
   rand,
   formatSlug,
   CapitalizeFirstLetter,
+  getDailyReadingsFeedbackAdminEmailOptions,
+  getRosaryFeedbackAdminEmailOptions
 };
