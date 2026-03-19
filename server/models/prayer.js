@@ -9,6 +9,7 @@ const prayerSchema = new mongoose.Schema({
     ref: "Language",
     required: true,
   },
+  audioUrl: { type: String },
   type: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "PrayerType",

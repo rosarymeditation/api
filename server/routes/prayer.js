@@ -1,13 +1,15 @@
 const controller = require("../controllers/prayer");
 const { rootUrl } = require("../utility/constants");
-const { auth, upload } = require("../utility/global");
+const { auth, uploadPrayerMedia } = require("../utility/global");
 module.exports = (app) => {
-  app.post(rootUrl("prayer"), upload.single("photo"), controller.create);
+  app.post(rootUrl("prayer"),uploadPrayerMedia.fields([{ name: "photo", maxCount: 1 }, { name: "audio", maxCount: 1 }]), controller.create);
   app.post(rootUrl("prayers"), controller.findAll);
+  app.post(rootUrl("prayers_admin"), controller.findAllAdmin);
+  app.post(rootUrl("prayer_by_id"), controller.findById);
   app.delete(rootUrl("prayer/:id"), controller.delete);
   app.post(
     rootUrl("prayer_update"),
-    upload.single("photo"),
+   uploadPrayerMedia.fields([{ name: "photo", maxCount: 1 }, { name: "audio", maxCount: 1 }]),
 
     controller.update
   );

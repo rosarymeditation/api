@@ -13,26 +13,44 @@ const {
 module.exports = {
   create: async (req, res) => {
     try {
-      const photoObject = req.file;
-      const photo = photoObject ? req.file.location : null;
-      //const type = await PrayerType.findOne({ name: "OTHERS" });
+      const photo = req.files?.photo?.[0]?.location || null;
+      const audioUrl = req.files?.audio?.[0]?.location || null;
       const { content, title, language, type } = req.body;
-      const data = Prayer({
-        title: title,
-        language: language,
-        content: content,
-        type: type,
-        url: photo,
-      });
+      const data = Prayer({ title, language, content, type, url: photo, audioUrl });
       await data.save();
-
       return res.status(OK).json({ error: false });
     } catch (err) {
       console.log(err);
       return res.status(OK).json({ error: true });
     }
   },
-
+  findAllAdmin: async (req, res) => {
+    try {
+      const { page = 1, limit = 50 } = req.body;
+      const data = await Prayer.find()
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .sort({ title: "asc" })
+        .populate("language")
+        .populate("type");
+      return res.status(OK).json({ data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
+    }
+  },
+  findById: async (req, res) => {
+    try {
+      const { id } = req.body;
+      const data = await Prayer.findById(id)
+        .populate("language")
+        .populate("type");
+      return res.status(OK).json({ data });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
+    }
+  },
   findAll: async (req, res) => {
     try {
       const type = await PrayerType.findOne({ name: "OTHERS" });
@@ -67,24 +85,19 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      // console.log(req.body);
-      const photoObject = req.file;
-      const photo = photoObject ? req.file.location : null;
-
-      const { title, content, langauge, type, id } = req.body;
-      const findPrayer = Prayer.findById(id);
+      const photo = req.files?.photo?.[0]?.location || null;
+      const audioUrl = req.files?.audio?.[0]?.location || null;
+      const { title, content, language, type, id } = req.body;
+      const findPrayer = await Prayer.findById(id);
       const updatedData = {
-        title: title,
-        content: content,
-        langauge: langauge,
-        type: type,
+        title,
+        content,
+        language,
+        type,
         url: photo || findPrayer.url,
+        audioUrl: audioUrl || findPrayer.audioUrl,
       };
-      updatedData.hasUpdated = true;
-      const options = { new: true };
-
-      const result = await Prayer.findByIdAndUpdate(id, updatedData, options);
-
+      const result = await Prayer.findByIdAndUpdate(id, updatedData, { new: true });
       return res.status(OK).json({ error: false, result });
     } catch (err) {
       return res.status(OK).json({ error: true, message: err });

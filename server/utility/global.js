@@ -102,6 +102,35 @@ const upload = multer({
     },
   }),
 });
+const uploadPrayerMedia = multer({
+  storage: multerS3({
+    s3,
+    bucket: "rosaryapp",
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(
+        null,
+        `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+      );
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (file.fieldname === "photo") {
+      const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+      allowed.includes(file.mimetype)
+        ? cb(null, true)
+        : cb(new Error("Invalid image type"), false);
+    } else if (file.fieldname === "audio") {
+      const allowed = ["audio/mpeg", "audio/mp3", "audio/wav", "audio/x-wav", "audio/mp4", "audio/aac"];
+      allowed.includes(file.mimetype)
+        ? cb(null, true)
+        : cb(new Error("Invalid audio type"), false);
+    } else {
+      cb(new Error("Unknown field"), false);
+    }
+  },
+});
 const uploadForCloudinary = multer({
   storage: multer.diskStorage({}),
   fileFilter: (req, file, cb) => {
@@ -389,5 +418,6 @@ module.exports = {
   formatSlug,
   CapitalizeFirstLetter,
   getDailyReadingsFeedbackAdminEmailOptions,
-  getRosaryFeedbackAdminEmailOptions
+  getRosaryFeedbackAdminEmailOptions,
+  uploadPrayerMedia
 };
