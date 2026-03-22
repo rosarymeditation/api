@@ -13,6 +13,7 @@ module.exports = (app) => {
   app.post(rootUrl("updateAll"), controller.updateAll);
   app.post(rootUrl("psalm_by_id"), controller.findById);
   app.delete(rootUrl("psalm/:id"), controller.delete);
+ 
   app.post(
     rootUrl("psalm_update"),
     uploadPrayerMedia.fields([{ name: "photo", maxCount: 1 }, { name: "audio", maxCount: 1 }]),

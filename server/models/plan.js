@@ -74,14 +74,16 @@ const PlanSchema = new mongoose.Schema(
         category: {
             type: String,
             enum: [
-                'Scripture',
-                'Saint',
-                'Virtue',
-                'Prayer',
-                'Reflection',
-                'Liturgical',
-                'Fasting',
-                'Lent'
+                // English
+                "Marian", "Scripture", "Saint", "Virtue", "Prayer",
+                "Reflection", "Liturgical", "Fasting", "Lent", "Marriage",
+                "Novena", "Healing", "Eucharistic", "Divine Mercy", "Rosary",
+                "Advent", "Consecration",
+                // Spanish
+                "Mariana", "Escritura", "Santos", "Virtud", "Oración",
+                "Reflexión", "Litúrgico", "Ayuno", "Cuaresma", "Matrimonio",
+                "Novena", "Sanación", "Eucarístico", "Divina Misericordia",
+                "Rosario", "Adviento", "Consagración",
             ],
             required: true,
         },
@@ -106,7 +108,7 @@ const PlanSchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
-      
+
     },
     {
         timestamps: true,

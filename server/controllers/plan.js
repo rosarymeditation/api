@@ -27,7 +27,7 @@ module.exports = {
         dailyItems,
         code = 0
       } = req.body;
-      console.log(req.body)
+    
       const photoObject = req.file;
       const photo = photoObject ? req.file.location : null;
       // Basic validation
@@ -80,12 +80,62 @@ module.exports = {
     }
 
   },
+  getCategories: async (req, res) => {
+    try {
+      const { code } = req.body;
+
+      const findCode = await Language.findOne({ code: code.toString() });
+      if (!findCode) {
+        return res.status(400).json({ error: true, message: "Language not found" });
+      }
+
+      // Only return categories that have active plans in this language
+      const categories = await Plan.distinct("category", {
+        language: findCode._id,
+        isActive: true,
+      });
+      console.log("Categories ----------------------------Start--------")
+      console.log(categories)
+      console.log("Categories ----------------------------End--------")
+      return res.status(200).json({ categories });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: true, message: err });
+    }
+  },
+  findAllPageNew: async (req, res) => {
+    try {
+      let { code, limit = 10, page = 1, category } = req.body;
+
+      var findCode = await Language.findOne({ code: code.toString() });
+      if (!findCode) {
+        return res.status(400).json({ error: true, message: "Language not found" });
+      }
+
+      const query = { language: findCode._id };
+
+      // Add category to query only if provided
+      if (category) {
+        query.category = category;
+      }
+
+      const [data, total] = await Promise.all([
+        Plan.find(query).skip((page - 1) * limit).limit(limit),
+        Plan.countDocuments(query),
+      ]);
+
+      return res.status(OK).json({ data, total });
+    } catch (err) {
+      console.log(err);
+      return res.status(SERVER_ERROR).json({ error: true, message: err });
+    }
+  },
   findAll: async (req, res) => {
     try {
       let { code, date, limit = 10, page = 1 } = req.body;
 
 
-      console.log(req.body)
+      
       var findCode = await Language.findOne({
         code: code.toString(),
       });
