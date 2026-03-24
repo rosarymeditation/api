@@ -1,4 +1,4 @@
-const PersonalisedReflection = require("../models/personalisedReflection");
+const PersonalisedReflection = require("../models/PersonalisedReflection");
 const DailyReading = require("../models/dailyReading");
 const Language = require("../models/language");
 const Anthropic = require("@anthropic-ai/sdk");
