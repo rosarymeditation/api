@@ -10,6 +10,12 @@ var cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.use((req, res, next) => {
+  res.setTimeout(90000, () => {
+    res.status(408).json({ error: true, message: "Request timeout" });
+  });
+  next();
+});
 // Log requests to the console.
 //app.use(logger("dev"));
 
@@ -74,6 +80,7 @@ require(`${refPath}suggestion`)(app);
 require(`${refPath}prayerCatholic`)(app);
 require(`${refPath}audio`)(app);
 require(`${refPath}psalm`)(app);
+require(`${refPath}personalisedReflection`)(app);
 require(`${refPath}novena`)(app);
 require(`${refPath}log`)(app);
 require(`${refPath}payment`)(app);

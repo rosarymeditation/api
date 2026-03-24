@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "@emailjs/browser": "^4.4.1",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@sendgrid/mail": "^7.4.6",
