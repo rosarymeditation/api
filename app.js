@@ -40,8 +40,10 @@ app.use((req, res, next) => {
 // app.use(Sentry.Handlers.tracingHandler());
 // app.use(Sentry.Handlers.errorHandler());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 const mongoString = process.env.DATABASE_URL;
 const mongoose = require("mongoose");
